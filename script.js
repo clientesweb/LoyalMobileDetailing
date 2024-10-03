@@ -13,8 +13,8 @@ const testimonials = [
 ];
 
 const bannerSlides = [
-    { image: 'banner1 (1).png', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
-    { image: 'banner3 (1).png', subtitle: 'Restore Your Car\'s Original Shine' },
+    { image: 'bannerss.png, title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
+    { image: 'banners.png', subtitle: 'Restore Your Car\'s Original Shine' },
     { image: 'banner2.png', title: 'Premium Ceramic Coatings', subtitle: 'Long-Lasting Protection for Your Vehicle' },
 ];
 
