@@ -13,8 +13,8 @@ const testimonials = [
 ];
 
 const bannerSlides = [
-    { image: 'bannerss.png, title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
-    { image: 'banners.png', subtitle: 'Restore Your Car\'s Original Shine' },
+    { image: 'bannerss.png', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
+    { image: 'banners.png', title: 'Expert Paint Correction', subtitle: 'Restore Your Car\'s Original Shine' },
     { image: 'banner2.png', title: 'Premium Ceramic Coatings', subtitle: 'Long-Lasting Protection for Your Vehicle' },
 ];
 
@@ -26,7 +26,7 @@ const promoSlides = [
 
 // Helper function to create elements with classes
 function createElement(tag, classes, textContent) {
-    const element =  document.createElement(tag);
+    const element = document.createElement(tag);
     element.className = classes;
     if (textContent) element.textContent = textContent;
     return element;
@@ -54,8 +54,13 @@ const nextButton = document.getElementById('nextSlide');
 function updateHeroSlide() {
     const slide = bannerSlides[currentSlide];
     heroSlider.style.backgroundImage = `url(${slide.image})`;
-    heroSlider.querySelector('h1').textContent = slide.title;
-    heroSlider.querySelector('p').textContent = slide.subtitle;
+    heroSlider.style.backgroundSize = 'cover';
+    heroSlider.style.backgroundPosition = 'center';
+    const titleElement = heroSlider.querySelector('h1');
+    const subtitleElement = heroSlider.querySelector('p');
+    
+    if (titleElement) titleElement.textContent = slide.title || '';
+    if (subtitleElement) subtitleElement.textContent = slide.subtitle || '';
 }
 
 function nextSlide() {
@@ -68,82 +73,100 @@ function prevSlide() {
     updateHeroSlide();
 }
 
-prevButton.addEventListener('click', prevSlide);
-nextButton.addEventListener('click', nextSlide);
+if (prevButton) prevButton.addEventListener('click', prevSlide);
+if (nextButton) nextButton.addEventListener('click', nextSlide);
 setInterval(nextSlide, 5000);
 updateHeroSlide();
 
 // Services Section
 const servicesContainer = document.getElementById('servicesContainer');
 
-services.forEach(service => {
-    const card = createElement('div', 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow');
-    
-    const image = createElement('img', 'w-full h-48 object-cover');
-    image.src = service.image;
-    image.alt = service.name;
-    
-    const content = createElement('div', 'p-6');
-    const title = createElement('h3', 'text-xl font-semibold mb-2 text-gradient', service.name);
-    const description = createElement('p', 'text-gray-600', service.description);
-    
-    content.appendChild(title);
-    content.appendChild(description);
-    card.appendChild(image);
-    card.appendChild(content);
-    servicesContainer.appendChild(card);
-});
+if (servicesContainer) {
+    services.forEach(service => {
+        const card = createElement('div', 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow');
+        
+        const image = createElement('img', 'w-full h-48 object-cover');
+        image.src = service.image;
+        image.alt = service.name;
+        
+        const content = createElement('div', 'p-6');
+        const title = createElement('h3', 'text-xl font-semibold mb-2 text-gradient', service.name);
+        const description = createElement('p', 'text-gray-600', service.description);
+        
+        content.appendChild(title);
+        content.appendChild(description);
+        card.appendChild(image);
+        card.appendChild(content);
+        servicesContainer.appendChild(card);
+    });
+}
 
 // Gallery Section
 const galleryContainer = document.getElementById('galleryContainer');
 
-for (let i = 0; i < 8; i++) {
-    const item = createElement('div', 'relative group');
-    const image = createElement('img', 'w-full h-64 object-cover rounded transition-transform duration-300 group-hover:scale-105');
-    image.src = `/placeholder.svg?height=300&width=300&text=Work+${i + 1}`;
-    image.alt = `Work ${i + 1}`;
-    item.appendChild(image);
-    galleryContainer.appendChild(item);
+if (galleryContainer) {
+    for (let i = 0; i < 8; i++) {
+        const item = createElement('div', 'relative group');
+        const image = createElement('img', 'w-full h-64 object-cover rounded transition-transform duration-300 group-hover:scale-105');
+        image.src = `/placeholder.svg?height=300&width=300&text=Work+${i + 1}`;
+        image.alt = `Work ${i + 1}`;
+        item.appendChild(image);
+        galleryContainer.appendChild(item);
+    }
 }
 
 // Testimonials Section
 const testimonialsContainer = document.getElementById('testimonialsContainer');
 
-testimonials.forEach(testimonial => {
-    const card = createElement('div', 'bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow');
-    
-    const comment = createElement('p', 'text-gray-600 mb-4', `"${testimonial.comment}"`);
-    
-    const authorInfo = createElement('div', 'flex items-center');
-    const avatar = createElement('img', 'w-12 h-12 rounded-full mr-4');
-    avatar.src = `/placeholder.svg?height=50&width=50&text=${testimonial.name}`;
-    avatar.alt = testimonial.name;
-    
-    const authorDetails = createElement('div');
-    const name = createElement('h4', 'font-semibold text-gradient', testimonial.name);
-    const role = createElement('p', 'text-sm text-gray-500', testimonial.role);
-    
-    authorDetails.appendChild(name);
-    authorDetails.appendChild(role);
-    authorInfo.appendChild(avatar);
-    authorInfo.appendChild(authorDetails);
-    
-    card.appendChild(comment);
-    card.appendChild(authorInfo);
-    testimonialsContainer.appendChild(card);
-});
+if (testimonialsContainer) {
+    testimonials.forEach(testimonial => {
+        const card = createElement('div', 'bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow');
+        
+        const comment = createElement('p', 'text-gray-600 mb-4', `"${testimonial.comment}"`);
+        
+        const authorInfo = createElement('div', 'flex items-center');
+        const avatar = createElement('img', 'w-12 h-12 rounded-full mr-4');
+        avatar.src = `/placeholder.svg?height=50&width=50&text=${testimonial.name}`;
+        avatar.alt = testimonial.name;
+        
+        const authorDetails = createElement('div');
+        const name = createElement('h4', 'font-semibold text-gradient', testimonial.name);
+        const role = createElement('p', 'text-sm text-gray-500', testimonial.role);
+        
+        authorDetails.appendChild(name);
+        authorDetails.appendChild(role);
+        authorInfo.appendChild(avatar);
+        authorInfo.appendChild(authorDetails);
+        
+        card.appendChild(comment);
+        card.appendChild(authorInfo);
+        testimonialsContainer.appendChild(card);
+    });
+}
 
 // Form submissions
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    // Here you would typically send the form data to a server
-    alert('Thank you for your message. We will get back to you soon!');
-    this.reset();
-});
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Here you would typically send the form data to a server
+        alert('Thank you for your message. We will get back to you soon!');
+        this.reset();
+    });
+}
 
-document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    // Here you would typically send the email to a server for newsletter subscription
-    alert('Thank you for subscribing to our newsletter!');
-    this.reset();
+const newsletterForm = document.getElementById('newsletterForm');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Here you would typically send the email to a server for newsletter subscription
+        alert('Thank you for subscribing to our newsletter!');
+        this.reset();
+    });
+}
+
+// Initialize everything when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updatePromoSlide();
+    updateHeroSlide();
 });
