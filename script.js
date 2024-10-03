@@ -13,7 +13,7 @@ const testimonials = [
 ];
 
 const bannerSlides = [
-    { image: '459154806_18250801279251516_1685784460642147131_n.jpg', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
+    { image: '/placeholder.svg?height=600&width=1200&text=Slide+1', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
     { image: '/placeholder.svg?height=600&width=1200&text=Slide+2', title: 'Expert Paint Correction', subtitle: 'Restore Your Car\'s Original Shine' },
     { image: '/placeholder.svg?height=600&width=1200&text=Slide+3', title: 'Premium Ceramic Coatings', subtitle: 'Long-Lasting Protection for Your Vehicle' },
 ];
@@ -84,7 +84,7 @@ services.forEach(service => {
     image.alt = service.name;
     
     const content = createElement('div', 'p-6');
-    const title = createElement('h3', 'text-xl font-semibold mb-2', service.name);
+    const title = createElement('h3', 'text-xl font-semibold mb-2 text-gradient', service.name);
     const description = createElement('p', 'text-gray-600', service.description);
     
     content.appendChild(title);
@@ -120,7 +120,7 @@ testimonials.forEach(testimonial => {
     avatar.alt = testimonial.name;
     
     const authorDetails = createElement('div');
-    const name = createElement('h4', 'font-semibold', testimonial.name);
+    const name = createElement('h4', 'font-semibold text-gradient', testimonial.name);
     const role = createElement('p', 'text-sm text-gray-500', testimonial.role);
     
     authorDetails.appendChild(name);
