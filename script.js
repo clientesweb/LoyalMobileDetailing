@@ -13,7 +13,7 @@ const testimonials = [
 ];
 
 const bannerSlides = [
-    { image: '/placeholder.svg?height=600&width=1200&text=Slide+1', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
+    { image: '459154806_18250801279251516_1685784460642147131_n.jpg', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
     { image: '/placeholder.svg?height=600&width=1200&text=Slide+2', title: 'Expert Paint Correction', subtitle: 'Restore Your Car\'s Original Shine' },
     { image: '/placeholder.svg?height=600&width=1200&text=Slide+3', title: 'Premium Ceramic Coatings', subtitle: 'Long-Lasting Protection for Your Vehicle' },
 ];
