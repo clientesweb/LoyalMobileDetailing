@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const promotionSlider = document.getElementById('promotion-slider');
     const topBanner = document.getElementById('top-banner');
-    const headerSpacer = document.getElementById('header-spacer');
 
     // Preloader
 window.addEventListener('load', () => {
