@@ -133,6 +133,7 @@ nav {
 }
 
 .nav-links a:hover::after {
+    
     transform: scaleX(1);
 }
 
@@ -140,7 +141,6 @@ nav {
     display: none;
     background: none;
     border: none;
-    
     color: var(--accent-color);
     font-size: 1.5rem;
     cursor: pointer;
@@ -673,11 +673,6 @@ section {
     margin-bottom: 2rem;
 }
 
-/* Smooth scrolling for all browsers */
-html {
-    scroll-behavior: smooth;
-}
-
 /* Improve accessibility */
 .sr-only {
     position: absolute;
@@ -725,7 +720,7 @@ html {
 }
 
 .gallery-item::after {
-    content: 'View';
+    content: 'Ver';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -750,7 +745,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
     opacity: 0;
     transition: opacity var(--transition-speed);
 }
@@ -765,72 +760,174 @@ html {
     outline-offset: 2px;
 }
 
-/* Add a subtle text shadow to headings for better contrast */
-h1, h2, h3 {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+/* Add a subtle shadow to the header on scroll */
+#main-header.scrolled {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Improve the visibility of social icons in the footer */
-footer .social-icons a {
-    background-color: rgba(255,255,255,0.1);
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color var(--transition-speed);
-}
-
-footer .social-icons a:hover {
-    background-color: rgba(255,255,255,0.2);
-}
-
-/* Add a subtle scale effect to the logo on hover */
-.logo:hover img {
-    transform: scale(1.1);
-    transition: transform var(--transition-speed);
-}
-
-/* Improve the visibility of the promotion content */
-.promotion-item {
-    padding: 0.25rem 0;
-    font-weight: 600;
-}
-
-/* Add a subtle glow effect to the hero content */
-.hero-content {
-    box-shadow: 0 0 20px rgba(255,255,255,0.1);
-}
-
-/* Improve the visibility of the map container */
-.map-container {
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+/* Improve the visibility of the promotion banner */
+.promotion-content {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Add a subtle transition to form inputs */
 .contact-form input,
 .contact-form textarea {
-    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
 }
 
 .contact-form input:hover,
 .contact-form textarea:hover {
-    border-color: var(--secondary-color);
+    background-color: rgba(255,255,255,0.9);
 }
 
-/* Improve the visibility of the footer bottom content */
-.footer-bottom {
-    font-size: 0.9rem;
+/* Improve the footer layout on very small screens */
+@media (max-width: 320px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Add a subtle scale effect to service images on hover */
+.service-card img {
+    transition: transform var(--transition-speed);
+}
+
+.service-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Improve the visibility of the mobile menu toggle */
+.menu-toggle {
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color var(--transition-speed);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Add a subtle transition to social icons */
+.social-icons a {
+    transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+.social-icons a:hover {
+    transform: translateY(-2px);
     opacity: 0.8;
 }
 
-/* Add a subtle hover effect to footer links */
+/* Improve the visibility of the current section in the navigation */
+.nav-links a.active {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* Add a subtle scale effect to the logo on hover */
+.logo {
+    transition: transform var(--transition-speed);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Improve the visibility of form validation messages */
+.contact-form input:invalid,
+.contact-form textarea:invalid {
+    border-color: #ff3860;
+}
+
+.contact-form input:invalid:focus,
+.contact-form textarea:invalid:focus {
+    box-shadow: 0 0 0 2px rgba(255,56,96,0.2);
+}
+
+/* Add a subtle transition to gallery filter buttons */
+.filter-btn {
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.filter-btn:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Improve the visibility of the current filter */
+.filter-btn.active {
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Add a subtle scale effect to gallery items on hover */
+.gallery-item img {
+    transition: transform var(--transition-speed);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Improve the visibility of the WhatsApp button */
+.whatsapp-button {
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.whatsapp-button:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Add a subtle transition to the hero content */
+.hero-content {
+    transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+.hero:hover .hero-content {
+    transform: translateY(-5px);
+    opacity: 0.9;
+}
+
+/* Improve the visibility of the ad banner */
+.ad-banner {
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+/* Add a subtle transition to the map container */
+.map-container {
+    transition: box-shadow var(--transition-speed);
+}
+
+.map-container:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Improve the visibility of footer links */
+.footer-links a {
+    position: relative;
+}
+
 .footer-links a::after {
     content: '';
-    display: block;
-    width: 0;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
     height: 1px;
     background-color: var(--secondary-color);
-    transition: width var(--transition-speed);
+    transform: scaleX(0);
+    transition: transform var(--transition-speed);
 }
 
 .footer-links a:hover::after {
-    width: 100%;
+    transform: scaleX(1);
 }
