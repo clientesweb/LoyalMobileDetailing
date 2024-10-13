@@ -37,6 +37,16 @@
         .hover-scale:hover {
             transform: scale(1.05);
         }
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        #header-spacer {
+            height: 64px; /* Ajusta esto según la altura de tu header */
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-100">
@@ -69,7 +79,7 @@
         </div>
     </div>
 
-    <header id="main-header" class="bg-black bg-opacity-90 shadow-md fixed w-full z-10 transition-all duration-300">
+    <header id="main-header" class="bg-black bg-opacity-90 shadow-md z-10 transition-all duration-300 w-full">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-2">
@@ -92,6 +102,7 @@
             <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Contact</a>
         </div>
     </header>
+    <div id="header-spacer"></div>
 
     <main class="pt-16">
         <section class="hero relative h-screen flex items-center justify-center overflow-hidden">
@@ -182,6 +193,7 @@
                     </ul>
                 </div>
                 <div>
+                    
                     <h3 class="text-xl font-bold mb-2">Connect With Us</h3>
                     <div class="flex space-x-4">
                         <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-gray-300 transition-colors duration-300">
