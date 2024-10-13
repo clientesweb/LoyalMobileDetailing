@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerSpacer = document.getElementById('header-spacer');
 
     // Preloader
-    window.addEventListener('load', () => {
+window.addEventListener('load', () => {
+    if (preloader) {
         setTimeout(() => {
             preloader.style.opacity = '0';
             preloader.style.transition = 'opacity 0.5s ease';
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 preloader.style.display = 'none';
             }, 500);
         }, 500); // Añadimos un pequeño retraso para asegurar que todo se ha cargado
-    });
+    }
+});
 
     // Mobile menu toggle
     menuToggle.addEventListener('click', () => {
