@@ -1,13 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
+document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
+    const header = document.getElementById('main-header');
+    const servicesGrid = document.getElementById('servicesGrid');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const contactForm = document.getElementById('contactForm');
+    const adSlider = document.getElementById('adSlider');
 
-    menuToggle.addEventListener('click', function() {
+    // Mobile menu toggle
+    menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
 
-    // Smooth scrolling for anchor links
+    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -17,58 +23,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll animations
-    const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    animateOnScrollElements.forEach(el => {
-        observer.observe(el);
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     });
 
     // Services data
     const services = [
         {
-            title: "Interior Detailing",
-            description: "Deep clean and sanitize your car's interior for a fresh, like-new feel.",
+            title: "Detallado Interior",
+            description: "Limpieza profunda y desinfección del interior de su auto para una sensación fresca y como nueva.",
             image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
         },
         {
-            title: "Exterior Detailing",
-            description: "Restore your car's shine with our thorough exterior detailing service.",
+            title: "Detallado Exterior",
+            description: "Restaure el brillo de su auto con nuestro servicio de detallado exterior completo.",
             image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
         },
         {
-            title: "Ceramic Coating",
-            description: "Protect your car's paint with our long-lasting ceramic coating service.",
+            title: "Recubrimiento Cerámico",
+            description: "Proteja la pintura de su auto con nuestro servicio de recubrimiento cerámico de larga duración.",
             image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         },
         {
-            title: "Paint Correction",
-            description: "Remove scratches and swirl marks to restore your car's perfect finish.",
+            title: "Corrección de Pintura",
+            description: "Elimine rayones y marcas de remolino para restaurar el acabado perfecto de su auto.",
             image: "https://images.unsplash.com/photo-1612570158821-4503900049b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         }
     ];
 
-    // Populate services
-    const servicesGrid = document.getElementById('servicesGrid');
+    // Populate services grid
     services.forEach(service => {
         const serviceCard = document.createElement('div');
-        serviceCard.classList.add('service-card', 'animate-on-scroll');
+        serviceCard.className = 'service-card animate-on-scroll';
         serviceCard.innerHTML = `
-            <img src="${service.image}" alt="${service.title}" loading="lazy">
+            <img src="${service.image}" alt="${service.title}">
             <div class="service-card-content">
                 <h3>${service.title}</h3>
                 <p>${service.description}</p>
-                <a href="#contact" class="btn">Book Now</a>
+                <a href="#contact" class="btn">Reservar Ahora</a>
             </div>
         `;
         servicesGrid.appendChild(serviceCard);
@@ -84,154 +81,124 @@ document.addEventListener('DOMContentLoaded', function() {
         { image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", category: "exterior" }
     ];
 
-    // Populate gallery
-    const galleryGrid = document.getElementById('galleryGrid');
-    galleryItems.forEach(item => {
-        const galleryItem = document.createElement('div');
-        galleryItem.classList.add('gallery-item', 'animate-on-scroll');
-        galleryItem.dataset.category = item.category;
-        galleryItem.innerHTML = `<img src="${item.image}" alt="Gallery Image" loading="lazy">`;
-        galleryGrid.appendChild(galleryItem);
-    });
+    // Populate gallery grid
+    function populateGallery(items) {
+        galleryGrid.innerHTML = '';
+        items.forEach(item => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item animate-on-scroll';
+            galleryItem.innerHTML = `<img src="${item.image}" alt="Gallery item">`;
+            galleryGrid.appendChild(galleryItem);
+        });
+    }
+
+    populateGallery(galleryItems);
 
     // Gallery filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.dataset.filter;
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
+            button.classList.add('active');
 
-            galleryGrid.querySelectorAll('.gallery-item').forEach(item => {
-                if (filter === 'all' || item.dataset.category === filter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            const filteredItems = filter === 'all' 
+                ? galleryItems 
+                : galleryItems.filter(item => item.category === filter);
+            
+            populateGallery(filteredItems);
         });
     });
 
-    // Hero image slider
-    const heroImages = document.querySelectorAll('.hero-image');
-    let currentImageIndex = 0;
-
-    function showNextImage() {
-        heroImages[currentImageIndex].classList.remove('active');
-        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
-        heroImages[currentImageIndex].classList.add('active');
-    }
-
-    setInterval(showNextImage, 5000); // Change image every 5 seconds
+    // Contact form submission
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Here you would typically send the form data to a server
+        alert('Gracias por su mensaje. Nos pondremos en contacto con usted pronto.');
+        contactForm.reset();
+    });
 
     // Ad banner slider
-    const adSlider = document.getElementById('adSlider');
-    const adSlides = [
-        {
-            image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-            title: "Limited Time Offer!",
-            description: "Get 30% off on our Ceramic Coating package",
-            cta: "Book Now"
-        },
-        {
-            image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
-            title: "Summer Special!",
-            description: "Full Interior & Exterior Detailing for just $199",
-            cta: "Learn More"
-        },
-        {
-            image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-            title: "New Client Discount!",
-            description: "20% off your first service with us",
-            cta: "Claim Offer"
-        }
+    const ads = [
+        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Oferta Especial", description: "20% de descuento en detallado completo" },
+        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Nuevo Servicio", description: "Recubrimiento cerámico ahora disponible" },
+        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Paquete de Temporada", description: "Detallado interior + exterior por $199" }
     ];
 
-    adSlides.forEach(slide => {
+    ads.forEach(ad => {
         const adSlide = document.createElement('div');
-        adSlide.classList.add('ad-slide');
+        adSlide.className = 'ad-slide';
         adSlide.innerHTML = `
-            <img src="${slide.image}" alt="${slide.title}" loading="lazy">
+            <img src="${ad.image}" alt="${ad.title}">
             <div class="ad-content">
-                <h3>${slide.title}</h3>
-                <p>${slide.description}</p>
-                <a href="#contact" class="btn">${slide.cta}</a>
+                <h3>${ad.title}</h3>
+                <p>${ad.description}</p>
+                <a href="#contact" class="btn">Reservar Ahora</a>
             </div>
         `;
         adSlider.appendChild(adSlide);
     });
 
-    let currentAdIndex = 0;
-
-    function showNextAd() {
-        currentAdIndex = (currentAdIndex + 1) % adSlides.length;
-        adSlider.style.transform = `translateX(-${currentAdIndex * 100}%)`;
+    let currentSlide = 0;
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % ads.length;
+        adSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
 
-    setInterval(showNextAd, 5000); // Change ad every 5 seconds
+    setInterval(nextSlide, 5000);
 
-    // Promotion content slider
-    const promotionContent = document.querySelector('.promotion-content');
-    const promotionItems = document.querySelectorAll('.promotion-item');
-    let currentPromotionIndex = 0;
-
-    function showNextPromotion() {
-        currentPromotionIndex = (currentPromotionIndex + 1) % promotionItems.length;
-        promotionContent.style.transform = `translateX(-${currentPromotionIndex * 100}%)`;
-    }
-
-    setInterval(showNextPromotion, 3000); // Change promotion every 3 seconds
-
-    // Form submission
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Here you would typically send the form data to a server
-        alert('Thank you for your message. We will get back to you soon!');
-        contactForm.reset();
-    });
-
-    // Sticky header
-    const topBanner = document.querySelector('.top-banner');
-    const mainHeader = document.getElementById('main-header');
-    let lastScrollTop = 0;
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down
-            topBanner.style.transform = `translateY(-100%)`;
-            mainHeader.style.transform = `translateY(-${topBanner.offsetHeight}px)`;
-        } else {
-            // Scrolling up
-            topBanner.style.transform = `translateY(0)`;
-            mainHeader.style.transform = `translateY(0)`;
-        }
-        lastScrollTop = scrollTop;
-    });
-
-    // Lazy loading images
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('loading');
-                imageObserver.unobserve(img);
+    // Scroll animation
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            if (rect.top <= windowHeight * 0.75) {
+                el.classList.add('is-visible');
             }
         });
-    });
+    }
 
-    lazyImages.forEach(img => imageObserver.observe(img));
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Initial check
 
-    // Add smooth scrolling behavior
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+    // Hero image slider
+    const heroImages = [
+        "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+    ];
+
+    let currentHeroImage = 0;
+    const heroImageContainer = document.querySelector('.hero-image-container');
+
+    function createHeroImage(src, index) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Hero image ${index + 1}`;
+        img.className = `hero-image ${index === 0 ? 'active' : ''}`;
+        heroImageContainer.appendChild(img);
+    }
+
+    heroImages.forEach(createHeroImage);
+
+    function nextHeroImage() {
+        const images = heroImageContainer.querySelectorAll('.hero-image');
+        images[currentHeroImage].classList.remove('active');
+        currentHeroImage = (currentHeroImage + 1) % images.length;
+        images[currentHeroImage].classList.add('active');
+    }
+
+    setInterval(nextHeroImage, 5000);
+
+    // Promotion banner
+    const promotionItems = document.querySelectorAll('.promotion-item');
+    let currentPromotion = 0;
+
+    function nextPromotion() {
+        promotionItems[currentPromotion].style.transform = 'translateX(-100%)';
+        currentPromotion = (currentPromotion + 1) % promotionItems.length;
+        promotionItems[currentPromotion].style.transform = 'translateX(0)';
+    }
+
+    setInterval(nextPromotion, 3000);
 });
