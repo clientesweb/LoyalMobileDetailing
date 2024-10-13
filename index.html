@@ -21,7 +21,7 @@
             100% {background-position: 0% 50%;}
         }
         .gradient-bg {
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #333333, #4d4d4d);
+            background: linear-gradient(-45deg, #2c3e50, #3498db, #2980b9, #34495e);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -29,7 +29,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(45deg, #ffffff, #cccccc);
+            background-image: linear-gradient(45deg, #3498db, #2c3e50);
         }
         .hover-scale {
             transition: transform 0.3s ease;
@@ -50,9 +50,9 @@
     </style>
 </head>
 <body class="font-sans bg-gray-100">
-    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-800">
         <div class="w-32 h-32 relative">
-            <div class="w-full h-full border-4 border-blue-500 rounded-full animate-spin"></div>
+            <div class="w-full h-full border-4 border-white rounded-full animate-spin"></div>
             <div class="w-full h-full border-4 border-transparent border-t-blue-300 rounded-full animate-spin absolute top-0 left-0" style="animation-duration: 1.5s;"></div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl font-bold">Loading</div>
         </div>
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <header id="main-header" class="bg-black bg-opacity-90 shadow-md z-10 transition-all duration-300 w-full">
+    <header id="main-header" class="bg-gradient-to-r from-blue-900 to-blue-700 bg-opacity-90 shadow-md z-10 transition-all duration-300 w-full">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-2">
@@ -96,17 +96,17 @@
                 </button>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-black shadow-md">
-            <a href="#services" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Services</a>
-            <a href="#gallery" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Gallery</a>
-            <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-r from-blue-900 to-blue-700 shadow-md">
+            <a href="#services" class="block py-2 px-4 text-gray-300 hover:bg-blue-800 transition-colors duration-300">Services</a>
+            <a href="#gallery" class="block py-2 px-4 text-gray-300 hover:bg-blue-800 transition-colors duration-300">Gallery</a>
+            <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-blue-800 transition-colors duration-300">Contact</a>
         </div>
     </header>
     <main class="pt-16">
         <section class="hero relative h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0">
                 <img src="https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Luxury Car Detailing" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black opacity-50"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-50"></div>
             </div>
             <div class="relative z-10 text-center text-white">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Luxury Mobile Detailing</h1>
@@ -175,7 +175,8 @@
         </section>
     </main>
 
-    <footer class="bg-black text-white py-8">
+    
+    <footer class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
@@ -191,11 +192,10 @@
                     </ul>
                 </div>
                 <div>
-                    
                     <h3 class="text-xl font-bold mb-2">Connect With Us</h3>
                     <div class="flex space-x-4">
                         <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-gray-300 transition-colors duration-300">
-                            <i  data-feather="instagram" class="w-6 h-6"></i>
+                            <i data-feather="instagram" class="w-6 h-6"></i>
                         </a>
                         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-gray-300 transition-colors duration-300">
                             <i data-feather="facebook" class="w-6 h-6"></i>
