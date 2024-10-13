@@ -23,24 +23,63 @@ body, html {
 .container {
     width: 100%;
     max-width: 1200px;
+    
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Top banner styles */
+.top-banner {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+}
+
+.promotion-content {
+    display: flex;
+    overflow: hidden;
+    width: 70%;
+}
+
+.promotion-item {
+    flex: 0 0 100%;
+    white-space: nowrap;
+    transition: transform 0.5s ease-in-out;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
 /* Header styles */
 header {
-    background-color: var(--primary-color);
-    box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 1rem;
     position: fixed;
     width: 100%;
     z-index: 1000;
     transition: background-color 0.3s ease;
-    top: 40px; /* Adjusted to accommodate the promotion banner */
-}
-
-header.scrolled {
-    background-color: rgba(0, 0, 0, 0.8);
+    top: 40px; /* Adjusted to accommodate the top banner */
 }
 
 nav {
@@ -80,16 +119,6 @@ nav {
     color: var(--secondary-color);
 }
 
-.social-icons a {
-    color: var(--accent-color);
-    margin-left: 1rem;
-    transition: color 0.3s;
-}
-
-.social-icons a:hover {
-    color: var(--secondary-color);
-}
-
 .menu-toggle {
     display: none;
     background: none;
@@ -99,35 +128,12 @@ nav {
     cursor: pointer;
 }
 
-/* Promotion banner */
-.promotion-banner {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 0.5rem;
-    text-align: center;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1001;
-}
-
-.promotion-content {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.promotion-item {
-    flex: 0 0 100%;
-}
-
 /* Hero section */
 .hero {
     position: relative;
     height: 100vh;
     overflow: hidden;
-    padding-top: 120px; /* Adjusted to accommodate header and promotion banner */
+    padding-top: 120px; /* Adjusted to accommodate header and top banner */
 }
 
 .hero-image-container {
@@ -175,6 +181,50 @@ nav {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
+/* Ad banner styles */
+.ad-banner {
+    background-color: var(--primary-color);
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+.ad-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.ad-slide {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.ad-slide img {
+    width: 50%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.ad-content {
+    width: 50%;
+    padding: 0 2rem;
+    color: var(--accent-color);
+}
+
+.ad-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.ad-content p {
+    margin-bottom: 1rem;
+}
+
+/* Button styles */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -193,7 +243,7 @@ nav {
     transform: scale(1.05);
 }
 
-/*   Services section */
+/* Services section */
 .services {
     background-color: var(--accent-color);
     padding: 4rem 0;
@@ -256,6 +306,29 @@ nav {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: var(--accent-color);
+}
+
+.gallery-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
 }
 
 .gallery-grid {
@@ -493,6 +566,23 @@ footer {
         text-align: center;
         gap: 1rem;
     }
+
+    .ad-slide {
+        flex-direction: column;
+    }
+
+    .ad-slide img,
+    .ad-content {
+        width: 100%;
+    }
+
+    .ad-content {
+        padding: 1rem 0;
+    }
+
+    .gallery-filters {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -503,5 +593,20 @@ footer {
 
     .footer-grid {
         grid-template-columns: 1fr;
+    }
+
+    .top-banner {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    .promotion-content {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-icons {
+        margin-top: 0.5rem;
     }
 }
