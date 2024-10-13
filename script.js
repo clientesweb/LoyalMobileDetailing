@@ -9,13 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const adSlider = document.getElementById('adSlider');
     const preloader = document.getElementById('preloader');
     const promotionSlider = document.getElementById('promotion-slider');
+    const topBanner = document.getElementById('top-banner');
+    const headerSpacer = document.getElementById('header-spacer');
 
     // Preloader
     window.addEventListener('load', () => {
-        preloader.style.opacity = '0';
         setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
+            preloader.style.opacity = '0';
+            preloader.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 500); // Añadimos un pequeño retraso para asegurar que todo se ha cargado
     });
 
     // Mobile menu toggle
@@ -35,13 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Header scroll effect
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
+    function updateHeaderPosition() {
+        const topBannerHeight = topBanner.offsetHeight;
+        header.style.top = `${topBannerHeight}px`;
+        headerSpacer.style.height = `${header.offsetHeight + topBannerHeight}px`;
+        if (window.scrollY > topBannerHeight) {
             header.classList.add('bg-black', 'shadow-md');
         } else {
             header.classList.remove('bg-black', 'shadow-md');
         }
-    });
+    }
+
+    window.addEventListener('scroll', updateHeaderPosition);
+    window.addEventListener('resize', updateHeaderPosition);
+    updateHeaderPosition(); // Llamamos a la función inmediatamente para establecer la posición inicial
 
     // Services data
     const services = [
@@ -136,7 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ad banner slider
     const ads = [
         { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Special Offer", description: "20% off full detailing" },
-        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "New Service", description: "Ceramic coating now available" },
+        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wx
+
+MjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "New Service", description: "Ceramic coating now available" },
         { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Season Package", description: "Interior + Exterior detailing for $199" }
     ];
 
@@ -146,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ad = ads[currentAdIndex];
         adSlider.innerHTML = `
             <div class="flex items-center bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl">
-                <img src="${ad.image}" alt="${a d.title}" class="w-1/2 h-64 object-cover">
+                <img src="${ad.image}" alt="${ad.title}" class="w-1/2 h-64 object-cover">
                 <div class="w-1/2 p-6">
                     <h3 class="text-2xl font-semibold mb-2">${ad.title}</h3>
                     <p class="text-gray-600 mb-4">${ad.description}</p>
