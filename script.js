@@ -20,18 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll animations
     const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
 
-    function checkScroll() {
-        animateOnScrollElements.forEach(el => {
-            const elementTop = el.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (elementTop < windowHeight * 0.8) {
-                el.classList.add('is-visible');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
             }
         });
-    }
+    }, {
+        threshold: 0.1
+    });
 
-    window.addEventListener('scroll', checkScroll);
-    checkScroll(); // Check on initial load
+    animateOnScrollElements.forEach(el => {
+        observer.observe(el);
+    });
 
     // Services data
     const services = [
@@ -58,12 +59,12 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Populate services
-    const servicesGrid = document.querySelector('.services-grid');
+    const servicesGrid = document.getElementById('servicesGrid');
     services.forEach(service => {
         const serviceCard = document.createElement('div');
         serviceCard.classList.add('service-card', 'animate-on-scroll');
         serviceCard.innerHTML = `
-            <img src="${service.image}" alt="${service.title}">
+            <img src="${service.image}" alt="${service.title}" loading="lazy">
             <div class="service-card-content">
                 <h3>${service.title}</h3>
                 <p>${service.description}</p>
@@ -84,12 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Populate gallery
-    const galleryGrid = document.querySelector('.gallery-grid');
+    const galleryGrid = document.getElementById('galleryGrid');
     galleryItems.forEach(item => {
         const galleryItem = document.createElement('div');
         galleryItem.classList.add('gallery-item', 'animate-on-scroll');
         galleryItem.dataset.category = item.category;
-        galleryItem.innerHTML = `<img src="${item.image}" alt="Gallery Image">`;
+        galleryItem.innerHTML = `<img src="${item.image}" alt="Gallery Image" loading="lazy">`;
         galleryGrid.appendChild(galleryItem);
     });
 
@@ -124,8 +125,42 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(showNextImage, 5000); // Change image every 5 seconds
 
     // Ad banner slider
-    const adSlider = document.querySelector('.ad-slider');
-    const adSlides = document.querySelectorAll('.ad-slide');
+    const adSlider = document.getElementById('adSlider');
+    const adSlides = [
+        {
+            image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+            title: "Limited Time Offer!",
+            description: "Get 30% off on our Ceramic Coating package",
+            cta: "Book Now"
+        },
+        {
+            image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+            title: "Summer Special!",
+            description: "Full Interior & Exterior Detailing for just $199",
+            cta: "Learn More"
+        },
+        {
+            image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+            title: "New Client Discount!",
+            description: "20% off your first service with us",
+            cta: "Claim Offer"
+        }
+    ];
+
+    adSlides.forEach(slide => {
+        const adSlide = document.createElement('div');
+        adSlide.classList.add('ad-slide');
+        adSlide.innerHTML = `
+            <img src="${slide.image}" alt="${slide.title}" loading="lazy">
+            <div class="ad-content">
+                <h3>${slide.title}</h3>
+                <p>${slide.description}</p>
+                <a href="#contact" class="btn">${slide.cta}</a>
+            </div>
+        `;
+        adSlider.appendChild(adSlide);
+    });
+
     let currentAdIndex = 0;
 
     function showNextAd() {
@@ -148,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(showNextPromotion, 3000); // Change promotion every 3 seconds
 
     // Form submission
-    const contactForm = document.querySelector('.contact-form');
+    const contactForm = document.getElementById('contactForm');
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         // Here you would typically send the form data to a server
@@ -157,21 +192,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Sticky header
-    const header = document.querySelector('header');
     const topBanner = document.querySelector('.top-banner');
+    const mainHeader = document.getElementById('main-header');
     let lastScrollTop = 0;
 
     window.addEventListener('scroll', function() {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > lastScrollTop) {
             // Scrolling down
-            header.style.top = '0';
-            topBanner.style.top = `-${topBanner.offsetHeight}px`;
+            topBanner.style.transform = `translateY(-100%)`;
+            mainHeader.style.transform = `translateY(-${topBanner.offsetHeight}px)`;
         } else {
             // Scrolling up
-            header.style.top = `${topBanner.offsetHeight}px`;
-            topBanner.style.top = '0';
+            topBanner.style.transform = `translateY(0)`;
+            mainHeader.style.transform = `translateY(0)`;
         }
         lastScrollTop = scrollTop;
+    });
+
+    // Lazy loading images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('loading');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+
+    // Add smooth scrolling behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 });
