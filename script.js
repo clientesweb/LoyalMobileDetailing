@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         serviceCard.classList.add('service-card', 'animate-on-scroll');
         serviceCard.innerHTML = `
             <img src="${service.image}" alt="${service.title}" loading="lazy">
-            
             <div class="service-card-content">
                 <h3>${service.title}</h3>
                 <p>${service.description}</p>
@@ -112,6 +111,18 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // Hero image slider
+    const heroImages = document.querySelectorAll('.hero-image');
+    let currentImageIndex = 0;
+
+    function showNextImage() {
+        heroImages[currentImageIndex].classList.remove('active');
+        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+        heroImages[currentImageIndex].classList.add('active');
+    }
+
+    setInterval(showNextImage, 5000); // Change image every 5 seconds
 
     // Ad banner slider
     const adSlider = document.getElementById('adSlider');
@@ -197,5 +208,30 @@ document.addEventListener('DOMContentLoaded', function() {
             mainHeader.style.transform = `translateY(0)`;
         }
         lastScrollTop = scrollTop;
+    });
+
+    // Lazy loading images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('loading');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+
+    // Add smooth scrolling behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 });
