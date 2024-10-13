@@ -29,7 +29,7 @@ const services = [
 const servicesGrid = document.querySelector('.services-grid');
 services.forEach(service => {
     const serviceCard = document.createElement('div');
-    serviceCard.className = 'service-card';
+    serviceCard.className = 'service-card animate-on-scroll';
     serviceCard.innerHTML = `
         <img src="${service.image}" alt="${service.name}">
         <div class="service-card-content">
@@ -58,7 +58,7 @@ const galleryImages = [
 
 galleryImages.forEach((image, index) => {
     const galleryItem = document.createElement('div');
-    galleryItem.className = 'gallery-item';
+    galleryItem.className = 'gallery-item animate-on-scroll';
     galleryItem.innerHTML = `
         <img src="${image}" alt="Detailing work ${index + 1}">
     `;
@@ -72,4 +72,44 @@ contactForm.addEventListener('submit', (e) => {
     // Implement form submission logic here
     alert('Thank you for your message. We will get back to you soon!');
     contactForm.reset();
+});
+
+// Scroll animations
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight - 100) {
+            element.classList.add('is-visible');
+        }
+    });
+};
+
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
+
+// Header scroll effect
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// Close mobile menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
 });
