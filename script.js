@@ -1,172 +1,75 @@
-// Data
+// Promotion banner rotation
+const promotionContent = document.querySelector('.promotion-content');
+let promotionIndex = 0;
+setInterval(() => {
+    promotionIndex = (promotionIndex + 1) % 3;
+    promotionContent.style.transform = `translateX(-${promotionIndex * 100}%)`;
+}, 5000);
+
+// Hero image rotation
+const heroImages = document.querySelectorAll('.hero-image');
+let heroIndex = 0;
+setInterval(() => {
+    heroImages[heroIndex].classList.remove('active');
+    heroIndex = (heroIndex + 1) % heroImages.length;
+    heroImages[heroIndex].classList.add('active');
+}, 7000);
+
+// Services data
 const services = [
-    { name: 'Interior Shampooing', image: '/placeholder.svg?height=200&width=300&text=Interior+Shampooing', description: 'Deep cleaning for your car\'s interior, leaving it fresh and spotless.' },
-    { name: 'Paint Correction', image: '/placeholder.svg?height=200&width=300&text=Paint+Correction', description: 'Restore your car\'s paint to its original glory, removing scratches and swirls.' },
-    { name: 'Ceramic Coatings', image: '/placeholder.svg?height=200&width=300&text=Ceramic+Coatings', description: 'Long-lasting protection for your car\'s exterior, enhancing shine and durability.' },
-    { name: 'Buffing Specialist', image: '/placeholder.svg?height=200&width=300&text=Buffing+Specialist', description: 'Expert buffing to remove imperfections and restore your car\'s shine.' },
+    { name: "Interior Detailing", image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", message: "Hi, I'm interested in Interior Detailing services." },
+    { name: "Exterior Detailing", image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80", message: "Hi, I'm interested in Exterior Detailing services." },
+    { name: "Ceramic Coating", image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", message: "Hi, I'm interested in Ceramic Coating services." },
+    { name: "Paint Correction", image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", message: "Hi, I'm interested in Paint Correction services." },
+    { name: "Golf Cart Detailing", image: "https://images.unsplash.com/photo-1566933293069-b55c7f326dd4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", message: "Hi, I'm interested in Golf Cart Detailing services." },
+    { name: "Wheel Cleaning", image: "https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80", message: "Hi, I'm interested in Wheel Cleaning services." }
 ];
 
-const testimonials = [
-    { name: 'John Doe', role: 'Car Enthusiast', comment: "Cams Mobile Detailing transformed my old car into a showroom piece. Their attention to detail is unmatched!" },
-    { name: 'Jane Smith', role: 'Business Owner', comment: "I've been using Cams for my company fleet for years. They're always professional, punctual, and deliver exceptional results." },
-    { name: 'Mike Johnson', role: 'Classic Car Collector', comment: "The ceramic coating Cams applied to my vintage Mustang is incredible. It looks better than when it rolled off the factory floor!" },
+// Populate services
+const servicesGrid = document.querySelector('.services-grid');
+services.forEach(service => {
+    const serviceCard = document.createElement('div');
+    serviceCard.className = 'service-card';
+    serviceCard.innerHTML = `
+        <img src="${service.image}" alt="${service.name}">
+        <div class="service-card-content">
+            <h3>${service.name}</h3>
+            <p>Professional ${service.name.toLowerCase()} for your vehicle.</p>
+            <a href="https://wa.me/1234567890?text=${encodeURIComponent(service.message)}" class="btn" target="_blank" rel="noopener noreferrer">
+                Contact on WhatsApp
+            </a>
+        </div>
+    `;
+    servicesGrid.appendChild(serviceCard);
+});
+
+// Populate gallery
+const galleryGrid = document.querySelector('.gallery-grid');
+const galleryImages = [
+    "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+    "https://images.unsplash.com/photo-1617038220319-276d3cfab638?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1566933293069-b55c7f326dd4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
 ];
 
-const bannerSlides = [
-    { image: 'bannerss.png', title: 'Professional Car Detailing', subtitle: 'Transform Your Vehicle Today' },
-    { image: 'banners.png', title: 'Expert Paint Correction', subtitle: 'Restore Your Car\'s Original Shine' },
-    { image: 'banner2.png', title: 'Premium Ceramic Coatings', subtitle: 'Long-Lasting Protection for Your Vehicle' },
-];
+galleryImages.forEach((image, index) => {
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item';
+    galleryItem.innerHTML = `
+        <img src="${image}" alt="Detailing work ${index + 1}">
+    `;
+    galleryGrid.appendChild(galleryItem);
+});
 
-const promoSlides = [
-    { text: '🎉 Special Offer: 20% off on all detailing packages this month! Book now!' },
-    { text: '🚗 New ceramic coating service available! Protect your car\'s paint today.' },
-    { text: '🌟 Refer a friend and get $50 off your next service!' },
-];
-
-// Helper function to create elements with classes
-function createElement(tag, classes, textContent) {
-    const element = document.createElement(tag);
-    element.className = classes;
-    if (textContent) element.textContent = textContent;
-    return element;
-}
-
-// Promo Slider
-let currentPromo = 0;
-const promoSlider = document.getElementById('promoSlider');
-const promoText = promoSlider.querySelector('p');
-
-function updatePromoSlide() {
-    promoText.textContent = promoSlides[currentPromo].text;
-    currentPromo = (currentPromo + 1) % promoSlides.length;
-}
-
-setInterval(updatePromoSlide, 3000);
-updatePromoSlide();
-
-// Hero Slider
-let currentSlide = 0;
-const heroSlider = document.getElementById('heroSlider');
-const prevButton = document.getElementById('prevSlide');
-const nextButton = document.getElementById('nextSlide');
-
-function updateHeroSlide() {
-    const slide = bannerSlides[currentSlide];
-    heroSlider.style.backgroundImage = `url(${slide.image})`;
-    heroSlider.style.backgroundSize = 'cover';
-    heroSlider.style.backgroundPosition = 'center';
-    const titleElement = heroSlider.querySelector('h1');
-    const subtitleElement = heroSlider.querySelector('p');
-    
-    if (titleElement) titleElement.textContent = slide.title || '';
-    if (subtitleElement) subtitleElement.textContent = slide.subtitle || '';
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % bannerSlides.length;
-    updateHeroSlide();
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + bannerSlides.length) % bannerSlides.length;
-    updateHeroSlide();
-}
-
-if (prevButton) prevButton.addEventListener('click', prevSlide);
-if (nextButton) nextButton.addEventListener('click', nextSlide);
-setInterval(nextSlide, 5000);
-updateHeroSlide();
-
-// Services Section
-const servicesContainer = document.getElementById('servicesContainer');
-
-if (servicesContainer) {
-    services.forEach(service => {
-        const card = createElement('div', 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow');
-        
-        const image = createElement('img', 'w-full h-48 object-cover');
-        image.src = service.image;
-        image.alt = service.name;
-        
-        const content = createElement('div', 'p-6');
-        const title = createElement('h3', 'text-xl font-semibold mb-2 text-gradient', service.name);
-        const description = createElement('p', 'text-gray-600', service.description);
-        
-        content.appendChild(title);
-        content.appendChild(description);
-        card.appendChild(image);
-        card.appendChild(content);
-        servicesContainer.appendChild(card);
-    });
-}
-
-// Gallery Section
-const galleryContainer = document.getElementById('galleryContainer');
-
-if (galleryContainer) {
-    for (let i = 0; i < 8; i++) {
-        const item = createElement('div', 'relative group');
-        const image = createElement('img', 'w-full h-64 object-cover rounded transition-transform duration-300 group-hover:scale-105');
-        image.src = `/placeholder.svg?height=300&width=300&text=Work+${i + 1}`;
-        image.alt = `Work ${i + 1}`;
-        item.appendChild(image);
-        galleryContainer.appendChild(item);
-    }
-}
-
-// Testimonials Section
-const testimonialsContainer = document.getElementById('testimonialsContainer');
-
-if (testimonialsContainer) {
-    testimonials.forEach(testimonial => {
-        const card = createElement('div', 'bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow');
-        
-        const comment = createElement('p', 'text-gray-600 mb-4', `"${testimonial.comment}"`);
-        
-        const authorInfo = createElement('div', 'flex items-center');
-        const avatar = createElement('img', 'w-12 h-12 rounded-full mr-4');
-        avatar.src = `/placeholder.svg?height=50&width=50&text=${testimonial.name}`;
-        avatar.alt = testimonial.name;
-        
-        const authorDetails = createElement('div');
-        const name = createElement('h4', 'font-semibold text-gradient', testimonial.name);
-        const role = createElement('p', 'text-sm text-gray-500', testimonial.role);
-        
-        authorDetails.appendChild(name);
-        authorDetails.appendChild(role);
-        authorInfo.appendChild(avatar);
-        authorInfo.appendChild(authorDetails);
-        
-        card.appendChild(comment);
-        card.appendChild(authorInfo);
-        testimonialsContainer.appendChild(card);
-    });
-}
-
-// Form submissions
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Here you would typically send the form data to a server
-        alert('Thank you for your message. We will get back to you soon!');
-        this.reset();
-    });
-}
-
-const newsletterForm = document.getElementById('newsletterForm');
-if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Here you would typically send the email to a server for newsletter subscription
-        alert('Thank you for subscribing to our newsletter!');
-        this.reset();
-    });
-}
-
-// Initialize everything when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    updatePromoSlide();
-    updateHeroSlide();
+// Form submission (you'll need to implement the actual form submission logic)
+const contactForm = document.querySelector('.contact-form');
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Implement form submission logic here
+    alert('Thank you for your message. We will get back to you soon!');
+    contactForm.reset();
 });
