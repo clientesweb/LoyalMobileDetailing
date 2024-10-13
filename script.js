@@ -1,22 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
     const header = document.getElementById('main-header');
     const servicesGrid = document.getElementById('servicesGrid');
     const galleryGrid = document.getElementById('galleryGrid');
     const filterButtons = document.querySelectorAll('.filter-btn');
     const contactForm = document.getElementById('contactForm');
     const adSlider = document.getElementById('adSlider');
+    const preloader = document.getElementById('preloader');
+
+    // Preloader
+    window.addEventListener('load', () => {
+        preloader.style.display = 'none';
+    });
 
     // Mobile menu toggle
     menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+        mobileMenu.classList.toggle('hidden');
     });
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            mobileMenu.classList.add('hidden');
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
@@ -26,32 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Header scroll effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
-            header.classList.add('scrolled');
+            header.classList.add('bg-white', 'shadow-md');
         } else {
-            header.classList.remove('scrolled');
+            header.classList.remove('bg-white', 'shadow-md');
         }
     });
 
     // Services data
     const services = [
         {
-            title: "Detallado Interior",
-            description: "Limpieza profunda y desinfección del interior de su auto para una sensación fresca y como nueva.",
+            title: "Interior Detailing",
+            description: "Deep clean and sanitize your car's interior for a fresh, like-new feel.",
             image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
         },
         {
-            title: "Detallado Exterior",
-            description: "Restaure el brillo de su auto con nuestro servicio de detallado exterior completo.",
+            title: "Exterior Detailing",
+            description: "Restore your car's shine with our thorough exterior detailing service.",
             image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
         },
         {
-            title: "Recubrimiento Cerámico",
-            description: "Proteja la pintura de su auto con nuestro servicio de recubrimiento cerámico de larga duración.",
+            title: "Ceramic Coating",
+            description: "Protect your car's paint with our long-lasting ceramic coating service.",
             image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         },
         {
-            title: "Corrección de Pintura",
-            description: "Elimine rayones y marcas de remolino para restaurar el acabado perfecto de su auto.",
+            title: "Paint Correction",
+            description: "Remove scratches and swirl marks to restore your car's perfect finish.",
             image: "https://images.unsplash.com/photo-1612570158821-4503900049b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         }
     ];
@@ -59,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate services grid
     services.forEach(service => {
         const serviceCard = document.createElement('div');
-        serviceCard.className = 'service-card animate-on-scroll';
+        serviceCard.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105';
         serviceCard.innerHTML = `
-            <img src="${service.image}" alt="${service.title}">
-            <div class="service-card-content">
-                <h3>${service.title}</h3>
-                <p>${service.description}</p>
-                <a href="#contact" class="btn">Reservar Ahora</a>
+            <img src="${service.image}" alt="${service.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
+                <p class="text-gray-600 mb-4">${service.description}</p>
+                <a href="#contact" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">Book Now</a>
             </div>
         `;
         servicesGrid.appendChild(serviceCard);
@@ -86,8 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
         galleryGrid.innerHTML = '';
         items.forEach(item => {
             const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item animate-on-scroll';
-            galleryItem.innerHTML = `<img src="${item.image}" alt="Gallery item">`;
+            galleryItem.className = 'relative overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:scale-105';
+            galleryItem.innerHTML = `
+                <img src="${item.image}" alt="Gallery item" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                    <span class="text-white text-lg font-semibold">View</span>
+                </div>
+            `;
             galleryGrid.appendChild(galleryItem);
         });
     }
@@ -97,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gallery filter functionality
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+            const filter = button.textContent.toLowerCase();
+            filterButtons.forEach(btn => btn.classList.remove('active', 'bg-blue-500', 'text-white'));
+            button.classList.add('active', 'bg-blue-500', 'text-white');
 
             const filteredItems = filter === 'all' 
                 ? galleryItems 
@@ -113,26 +125,26 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         // Here you would typically send the form data to a server
-        alert('Gracias por su mensaje. Nos pondremos en contacto con usted pronto.');
+        alert('Thank you for your message. We will contact you soon.');
         contactForm.reset();
     });
 
     // Ad banner slider
     const ads = [
-        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Oferta Especial", description: "20% de descuento en detallado completo" },
-        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Nuevo Servicio", description: "Recubrimiento cerámico ahora disponible" },
-        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Paquete de Temporada", description: "Detallado interior + exterior por $199" }
+        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Special Offer", description: "20% off full detailing" },
+        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "New Service", description: "Ceramic coating now available" },
+        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Season Package", description: "Interior + Exterior detailing for $199" }
     ];
 
     ads.forEach(ad => {
         const adSlide = document.createElement('div');
-        adSlide.className = 'ad-slide';
+        adSlide.className = 'flex items-center bg-white rounded-lg shadow-md overflow-hidden';
         adSlide.innerHTML = `
-            <img src="${ad.image}" alt="${ad.title}">
-            <div class="ad-content">
-                <h3>${ad.title}</h3>
-                <p>${ad.description}</p>
-                <a href="#contact" class="btn">Reservar Ahora</a>
+            <img src="${ad.image}" alt="${ad.title}" class="w-1/2 h-64 object-cover">
+            <div class="w-1/2 p-6">
+                <h3 class="text-2xl font-semibold mb-2">${ad.title}</h3>
+                <p class="text-gray-600 mb-4">${ad.description}</p>
+                <a href="#contact" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">Book Now</a>
             </div>
         `;
         adSlider.appendChild(adSlide);
@@ -153,42 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = el.getBoundingClientRect();
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
             if (rect.top <= windowHeight * 0.75) {
-                el.classList.add('is-visible');
+                el.classList.add('animate-fade-in-up');
             }
         });
     }
 
     window.addEventListener('scroll', animateOnScroll);
     animateOnScroll(); // Initial check
-
-    // Hero image slider
-    const heroImages = [
-        "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-    ];
-
-    let currentHeroImage = 0;
-    const heroImageContainer = document.querySelector('.hero-image-container');
-
-    function createHeroImage(src, index) {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `Hero image ${index + 1}`;
-        img.className = `hero-image ${index === 0 ? 'active' : ''}`;
-        heroImageContainer.appendChild(img);
-    }
-
-    heroImages.forEach(createHeroImage);
-
-    function nextHeroImage() {
-        const images = heroImageContainer.querySelectorAll('.hero-image');
-        images[currentHeroImage].classList.remove('active');
-        currentHeroImage = (currentHeroImage + 1) % images.length;
-        images[currentHeroImage].classList.add('active');
-    }
-
-    setInterval(nextHeroImage, 5000);
 
     // Promotion banner
     const promotionItems = document.querySelectorAll('.promotion-item');
