@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loyal Mobile Detailing - Servicios Premium de Detallado de Autos</title>
-    <meta name="description" content="Loyal Mobile Detailing ofrece servicios premium de detallado de autos en las áreas de LA, OC e IE. Detallado interior y exterior, recubrimiento cerámico y más.">
+    <title>Loyal Mobile Detailing - Premium Auto Detailing Services</title>
+    <meta name="description" content="Loyal Mobile Detailing offers premium auto detailing services in LA, OC, and IE areas. Interior and exterior detailing, ceramic coating, and more.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,8 +15,15 @@
     <meta name="theme-color" content="#000000">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <style>
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
         .gradient-bg {
-            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #333333, #4d4d4d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
         .text-gradient {
             background-clip: text;
@@ -24,27 +31,37 @@
             -webkit-text-fill-color: transparent;
             background-image: linear-gradient(45deg, #ffffff, #cccccc);
         }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-100">
     <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
-        <div class="w-16 h-16 border-4 border-blue-500 rounded-full animate-spin"></div>
+        <div class="w-32 h-32 relative">
+            <div class="w-full h-full border-4 border-blue-500 rounded-full animate-spin"></div>
+            <div class="w-full h-full border-4 border-transparent border-t-blue-300 rounded-full animate-spin absolute top-0 left-0" style="animation-duration: 1.5s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl font-bold">Loading</div>
+        </div>
     </div>
 
-    <div id="top-banner" class="bg-black text-white py-2 overflow-hidden">
+    <div id="top-banner" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 overflow-hidden">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center">
                 <div id="promotion-slider" class="overflow-hidden w-full">
                     <!-- Promotion messages will be inserted here by JavaScript -->
                 </div>
                 <div class="social-icons flex space-x-4">
-                    <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-blue-300 transition-colors duration-300">
                         <i data-feather="instagram" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-blue-300 transition-colors duration-300">
                         <i data-feather="facebook" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-blue-300 transition-colors duration-300">
                         <i data-feather="twitter" class="w-5 h-5"></i>
                     </a>
                 </div>
@@ -52,7 +69,7 @@
         </div>
     </div>
 
-    <header id="main-header" class="bg-black shadow-md fixed w-full z-10 transition-all duration-300">
+    <header id="main-header" class="bg-black bg-opacity-90 shadow-md fixed w-full z-10 transition-all duration-300">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-2">
@@ -60,9 +77,9 @@
                     <span class="text-xl font-bold text-white">Loyal Mobile Detailing</span>
                 </a>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Servicios</a>
-                    <a href="#gallery" class="text-gray-300 hover:text-white transition-colors">Galería</a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contacto</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300">Services</a>
+                    <a href="#gallery" class="text-gray-300 hover:text-white transition-colors duration-300">Gallery</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
                 </div>
                 <button id="menu-toggle" class="md:hidden focus:outline-none">
                     <i data-feather="menu" class="w-6 h-6 text-white"></i>
@@ -70,41 +87,41 @@
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-black shadow-md">
-            <a href="#services" class="block py-2 px-4 text-gray-300 hover:bg-gray-800">Servicios</a>
-            <a href="#gallery" class="block py-2 px-4 text-gray-300 hover:bg-gray-800">Galería</a>
-            <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-gray-800">Contacto</a>
+            <a href="#services" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Services</a>
+            <a href="#gallery" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Gallery</a>
+            <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Contact</a>
         </div>
     </header>
 
     <main class="pt-16">
         <section class="hero relative h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Detallado de Autos de Lujo" class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Luxury Car Detailing" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black opacity-50"></div>
             </div>
             <div class="relative z-10 text-center text-white">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Detallado Móvil de Lujo</h1>
-                <p class="text-xl md:text-2xl mb-8 animate-fade-in-up delay-300">Sirviendo LA, OC, IE con detallado interior y exterior</p>
-                <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors animate-fade-in-up delay-600">Reservar Ahora</a>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Luxury Mobile Detailing</h1>
+                <p class="text-xl md:text-2xl mb-8 animate-fade-in-up delay-300">Serving LA, OC, IE with Interior & Exterior detailing</p>
+                <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-700 transition-colors duration-300 animate-fade-in-up delay-600">Book Now</a>
             </div>
         </section>
 
         <section id="services" class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 text-gradient">Nuestros Servicios</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-gradient">Our Services</h2>
                 <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
             </div>
         </section>
 
         <section id="gallery" class="py-16 gradient-bg">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">Nuestro Trabajo</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-white">Our Work</h2>
                 <div class="flex justify-center space-x-4 mb-8">
-                    <button class="filter-btn active bg-white text-gray-800 px-4 py-2 rounded-full">Todos</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full">Interior</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full">Exterior</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full">Cerámico</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full">Pintura</button>
+                    <button class="filter-btn active bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white">All</button>
+                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white">Interior</button>
+                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white">Exterior</button>
+                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white">Ceramic</button>
+                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white">Paint</button>
                 </div>
                 <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
@@ -118,12 +135,12 @@
 
         <section id="contact" class="py-16 bg-gray-100">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 text-gradient">Contáctanos</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 text-gradient">Contact Us</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <div class="flex items-center space-x-2">
                             <i data-feather="map-pin" class="text-blue-600"></i>
-                            <span>Sirviendo LA, OC, IE</span>
+                            <span>Serving LA, OC, IE</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <i data-feather="phone" class="text-blue-600"></i>
@@ -131,18 +148,18 @@
                         </div>
                         <div class="flex items-center space-x-2">
                             <i data-feather="mail" class="text-blue-600"></i>
-                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc4c3cbc2edc1c2d4ccc1c0c2cfc4c1c8c9c8d9ccc4c1c4c3ca83cec2c0">[email&#160;protected]</a></span>
+                            <span>info@loyalmobiledetailing.com</span>
                         </div>
                         <div class="w-full h-64 rounded-lg overflow-hidden">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6502594.616793959!2d-119.306607!3d37.2691761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia!5e0!3m2!1sen!2sus!4v1665523060961!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                     <form id="contactForm" class="space-y-4">
-                        <input type="text" placeholder="Nombre" class="w-full p-2 border rounded" required>
-                        <input type="email" placeholder="Email" class="w-full p-2 border rounded" required>
-                        <input type="tel" placeholder="Teléfono" class="w-full p-2 border rounded" required>
-                        <textarea placeholder="Mensaje" class="w-full p-2 border rounded h-32" required></textarea>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors">Enviar Mensaje</button>
+                        <input type="text" placeholder="Name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-300" required>
+                        <input type="email" placeholder="Email" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-300" required>
+                        <input type="tel" placeholder="Phone" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-300" required>
+                        <textarea placeholder="Message" class="w-full p-2 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-300" required></textarea>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors duration-300">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -153,27 +170,27 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Sobre Nosotros</h3>
-                    <p>Loyal Mobile Detailing proporciona servicios premium de detallado de autos en las áreas de LA, OC e IE.</p>
+                    <h3 class="text-xl font-bold mb-2">About Us</h3>
+                    <p>Loyal Mobile Detailing provides premium car detailing services in LA, OC, and IE areas.</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Enlaces Rápidos</h3>
+                    <h3 class="text-xl font-bold mb-2">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#services" class="hover:text-gray-300 transition-colors">Servicios</a></li>
-                        <li><a href="#gallery" class="hover:text-gray-300 transition-colors">Galería</a></li>
-                        <li><a href="#contact" class="hover:text-gray-300 transition-colors">Contacto</a></li>
+                        <li><a href="#services" class="hover:text-gray-300 transition-colors duration-300">Services</a></li>
+                        <li><a href="#gallery" class="hover:text-gray-300 transition-colors duration-300">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-gray-300 transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Conéctate Con Nosotros</h3>
+                    <h3 class="text-xl font-bold mb-2">Connect With Us</h3>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <i data-feather="instagram" class="w-6 h-6"></i>
+                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-gray-300 transition-colors duration-300">
+                            <i  data-feather="instagram" class="w-6 h-6"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-gray-300 transition-colors duration-300">
                             <i data-feather="facebook" class="w-6 h-6"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-gray-300 transition-colors duration-300">
                             <i data-feather="twitter" class="w-6 h-6"></i>
                         </a>
                     </div>
@@ -181,19 +198,19 @@
             </div>
             <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
                 <img src="https://i.ibb.co/Ld2nzKK/loyal-mobile-detailing-logo.jpg" alt="Loyal Mobile Detailing Logo" class="w-12 h-12 rounded-full mb-4 md:mb-0">
-                <p>&copy; 2024 Loyal Mobile Detailing. Todos los derechos reservados.</p>
-                <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">
-                    Desarrollado por Duality Domain
+                <p>&copy; 2024 Loyal Mobile Detailing. All rights reserved.</p>
+                <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors duration-300">
+                    Powered by Duality Domain
                 </a>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/1234567890" class="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors" target="_blank" rel="noopener  noreferrer" aria-label="Contáctanos por WhatsApp">
+    <a href="https://wa.me/1234567890" class="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556  5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
     </a>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+    <script src="script.js"></script>
     <script>
         feather.replace();
     </script>
