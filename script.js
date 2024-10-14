@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const heroSlider = document.getElementById('hero-slider');
     const adSlider = document.getElementById('adSlider');
+    const topBannerSlider = document.querySelector('.top-banner-slider');
+    let topBannerCurrentSlide = 0;
 
     // Preloader
     window.addEventListener('load', () => {
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 preloader.style.display = 'none';
             }, 500);
-        }, 800); // Reduced duration
+        }, 2000); // Increased duration for better visibility of the car animation
     });
 
     // Mobile menu toggle
@@ -165,8 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAdIndex = 0;
 
     function updateAdSlider() {
-        const ad = ads[currentAdIndex];
-        adSlider.innerHTML = `
+        currentAdIndex = (currentAdIndex + 1) % ads.length;
+        adSlider.style.transform = `translateX(-${currentAdIndex * 100}%)`;
+    }
+
+    adSlider.innerHTML = ads.map(ad => `
+        <div class="flex-shrink-0 w-full">
             <div class="flex items-center bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl">
                 <img src="${ad.image}" alt="${ad.title}" class="w-1/2 h-64 object-cover">
                 <div class="w-1/2 p-6">
@@ -175,9 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="#contact" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300">Book Now</a>
                 </div>
             </div>
-        `;
-        currentAdIndex = (currentAdIndex + 1) % ads.length;
-    }
+        </div>
+    `).join('');
+    adSlider.style.display = 'flex';
+    adSlider.style.transition = 'transform 0.5s ease-in-out';
 
     updateAdSlider();
     setInterval(updateAdSlider, 5000);
@@ -187,14 +194,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-10');
+                entry.target.classList.add('animate-fade-in');
             }
         });
     }, { threshold: 0.1 });
 
     fadeElems.forEach(elem => {
-        elem.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
         fadeObserver.observe(elem);
     });
+
+    function updateTopBannerSlider() {
+        topBannerCurrentSlide = (topBannerCurrentSlide + 1) % 3;
+        topBannerSlider.style.transform = `translateX(-${topBannerCurrentSlide * 100}%)`;
+    }
+
+    setInterval(updateTopBannerSlider, 5000);
 });
