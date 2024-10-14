@@ -35,21 +35,28 @@
     <meta name="theme-color" content="#000000">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <style>
+        :root {
+            --color-primary: #1a2b4e;
+            --color-secondary: #20b2aa;
+            --color-accent: #f0f4f8;
+            --color-text: #333333;
+            --color-text-light: #ffffff;
+        }
         @keyframes gradient {
             0% {background-position: 0% 50%;}
             50% {background-position: 100% 50%;}
             100% {background-position: 0% 50%;}
         }
         .gradient-bg {
-            background: linear-gradient(-45deg, #1a1a1a, #2c2c2c, #3a3a3a, #4a4a4a);
-            background-size: 400% 400%;
+            background: linear-gradient(-45deg, var(--color-primary), var(--color-secondary));
+            background-size: 200% 200%;
             animation: gradient 15s ease infinite;
         }
         .text-gradient {
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(45deg, #ffffff, #cccccc);
+            background-image: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
         }
         .hover-scale {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -71,16 +78,9 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes carMove {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .car-animation {
-            animation: carMove 2s linear infinite;
-        }
     </style>
 </head>
-<body class="font-montserrat bg-gradient-to-r from-gray-100 to-gray-300">
+<body class="font-montserrat bg-gradient-to-r from-accent to-white text-text">
     <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center gradient-bg">
         <div class="w-32 h-32 relative">
             <svg class="car-animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64" height="64">
@@ -104,13 +104,13 @@
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-2">
-                    <img src="img/logo.png" alt="Loyal Mobile Detailing Logo" class="w-12 h-12 rounded-full">
+                    <img src="logo.png" alt="Loyal Mobile Detailing Logo" class="w-12 h-12 rounded-full">
                     <span class="text-xl font-bold text-white">Loyal Mobile Detailing</span>
                 </a>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300">Services</a>
-                    <a href="#gallery" class="text-gray-300 hover:text-white transition-colors duration-300">Gallery</a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
+                    <a href="#services" class="text-text-light hover:text-white transition-colors duration-300">Services</a>
+                    <a href="#gallery" class="text-text-light hover:text-white transition-colors duration-300">Gallery</a>
+                    <a href="#contact" class="text-text-light hover:text-white transition-colors duration-300">Contact</a>
                 </div>
                 <button id="menu-toggle" class="md:hidden focus:outline-none">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -120,9 +120,9 @@
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden gradient-bg shadow-md">
-            <a href="#services" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Services</a>
-            <a href="#gallery" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Gallery</a>
-            <a href="#contact" class="block py-2 px-4 text-gray-300 hover:bg-gray-800 transition-colors duration-300">Contact</a>
+            <a href="#services" class="block py-2 px-4 text-text-light hover:bg-gray-800 transition-colors duration-300">Services</a>
+            <a href="#gallery" class="block py-2 px-4 text-text-light hover:bg-gray-800 transition-colors duration-300">Gallery</a>
+            <a href="#contact" class="block py-2 px-4 text-text-light hover:bg-gray-800 transition-colors duration-300">Contact</a>
         </div>
     </header>
 
@@ -139,7 +139,7 @@
             </div>
         </section>
 
-        <section id="services" class="py-16 bg-white fade-in">
+        <section id="services" class="py-16 bg-accent fade-in">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-center mb-12 text-gradient">Our Services</h2>
                 <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
@@ -150,17 +150,17 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-center mb-12 text-white">Our Work</h2>
                 <div class="flex flex-wrap justify-center space-x-2 space-y-2 mb-8">
-                    <button class="filter-btn active bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">All</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Interior</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Exterior</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Ceramic</button>
-                    <button class="filter-btn bg-white text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Paint</button>
+                    <button class="filter-btn active bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">All</button>
+                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Interior</button>
+                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Exterior</button>
+                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Ceramic</button>
+                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Paint</button>
                 </div>
                 <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
         </section>
 
-        <section id="ad-banner" class="py-16 bg-white fade-in">
+        <section id="ad-banner" class="py-16 bg-accent fade-in">
             <div class="container mx-auto px-4">
                 <div id="adSlider" class="overflow-hidden rounded-lg shadow-xl"></div>
             </div>
@@ -172,15 +172,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <div class="flex items-center  space-x-2">
-                            <i class="fas fa-map-marker-alt text-gray-600"></i>
+                            <i class="fas fa-map-marker-alt text-text"></i>
                             <span>Serving LA, OC, IE</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-phone text-gray-600"></i>
+                            <i class="fas fa-phone text-text"></i>
                             <span>123-456-7890</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-envelope text-gray-600"></i>
+                            <i class="fas fa-envelope text-text"></i>
                             <span>info@loyalmobiledetailing.com</span>
                         </div>
                         <div class="w-full h-64 rounded-lg overflow-hidden">
@@ -192,7 +192,7 @@
                         <input type="email" placeholder="Email" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required>
                         <input type="tel" placeholder="Phone" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required>
                         <textarea placeholder="Message" class="w-full p-2 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required></textarea>
-                        <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 transition-colors duration-300">Send Message</button>
+                        <button type="submit" class="w-full bg-primary text-white py-2 rounded hover:bg-secondary transition-colors duration-300">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -209,29 +209,30 @@
                 <div>
                     <h3 class="text-xl font-bold mb-2">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#services" class="hover:text-gray-300 transition-colors duration-300">Services</a></li>
-                        <li><a href="#gallery" class="hover:text-gray-300 transition-colors duration-300">Gallery</a></li>
-                        <li><a href="#contact" class="hover:text-gray-300 transition-colors duration-300">Contact</a></li>
+                        <li><a href="#services" class="hover:text-text-light transition-colors duration-300">Services</a></li>
+                        <li><a href="#gallery" class="hover:text-text-light transition-colors duration-300">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-text-light transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-2">Connect With Us</h3>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-gray-300 transition-colors  duration-300">
+                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-text-light transition-colors  duration-300">
                             <i class="fab fa-instagram fa-2x"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-gray-300 transition-colors duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-text-light transition-colors duration-300">
                             <i class="fab fa-facebook fa-2x"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-gray-300 transition-colors duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-text-light transition-colors duration-300">
                             <i class="fab fa-twitter fa-2x"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="mt-8 text-center">
+                <img src="logo.png" alt="Loyal Mobile Detailing Logo" class="w-16 h-16 mx-auto mb-4 rounded-full">
                 <p>&copy; 2024 Loyal Mobile Detailing. All rights reserved.</p>
-                <p class="mt-2">Powered by <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-300">Duality Domain</a></p>
+                <p class="mt-2">Powered by <a href="https://dualitydomain.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-secondary">Duality Domain</a></p>
             </div>
         </div>
     </footer>
