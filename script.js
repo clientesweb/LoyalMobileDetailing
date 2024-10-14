@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 preloader.style.display = 'none';
             }, 500);
-        }, 2000); // Increased duration for better visibility of the car animation
+        }, 2000);
     });
 
     // Mobile menu toggle
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="p-4">
                 <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
                 <p class="text-gray-600 mb-4">${service.description}</p>
-                <a href="#contact" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300">Book Now</a>
+                <a href="https://wa.me/1234567890?text=I'm%20interested%20in%20your%20${encodeURIComponent(service.title)}%20service" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer">Book Now</a>
             </div>
         `;
         servicesGrid.appendChild(serviceCard);
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fade-in');
+                entry.target.classList.add('visible');
             }
         });
     }, { threshold: 0.1 });
