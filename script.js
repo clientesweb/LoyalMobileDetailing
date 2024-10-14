@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     const preloader = document.getElementById('preloader');
     const heroSlider = document.getElementById('hero-slider');
+    const adSlider = document.getElementById('adSlider');
 
     // Preloader
     window.addEventListener('load', () => {
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 preloader.style.display = 'none';
             }, 500);
-        }, 1000);
+        }, 800); // Reduced duration
     });
 
     // Mobile menu toggle
@@ -39,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Header scroll effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
-            header.classList.add('shadow-md');
+            header.classList.add('shadow-md', 'bg-opacity-90');
         } else {
-            header.classList.remove('shadow-md');
+            header.classList.remove('shadow-md', 'bg-opacity-90');
         }
     });
 
@@ -153,6 +154,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateHeroSlider();
     setInterval(updateHeroSlider, 5000);
+
+    // Ad banner slider
+    const ads = [
+        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Special Offer", description: "20% off full detailing" },
+        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "New Service", description: "Ceramic coating now available" },
+        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Season Package", description: "Interior + Exterior detailing for $199" }
+    ];
+
+    let currentAdIndex = 0;
+
+    function updateAdSlider() {
+        const ad = ads[currentAdIndex];
+        adSlider.innerHTML = `
+            <div class="flex items-center bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl">
+                <img src="${ad.image}" alt="${ad.title}" class="w-1/2 h-64 object-cover">
+                <div class="w-1/2 p-6">
+                    <h3 class="text-2xl font-semibold mb-2">${ad.title}</h3>
+                    <p class="text-gray-600 mb-4">${ad.description}</p>
+                    <a href="#contact" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300">Book Now</a>
+                </div>
+            </div>
+        `;
+        currentAdIndex = (currentAdIndex + 1) % ads.length;
+    }
+
+    updateAdSlider();
+    setInterval(updateAdSlider, 5000);
 
     // Intersection Observer for fade-in effect
     const fadeElems = document.querySelectorAll('.fade-in');
