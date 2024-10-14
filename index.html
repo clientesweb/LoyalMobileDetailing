@@ -36,11 +36,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <style>
         :root {
-            --color-primary: #1e3a8a;
-            --color-secondary: #3b82f6;
-            --color-accent: #f0f9ff;
-            --color-text: #1f2937;
-            --color-text-light: #ffffff;
+            --color-primary: #000000; /* Negro */
+            --color-secondary: #FFD700; /* Dorado */
+            --color-accent: #808080; /* Gris */
+            --color-text: #FFFFFF; /* Blanco para el texto */
+            --color-text-light: #E0E0E0; /* Gris claro para texto secundario */
         }
         @keyframes gradient {
             0% {background-position: 0% 50%;}
@@ -48,7 +48,7 @@
             100% {background-position: 0% 50%;}
         }
         .gradient-bg {
-            background: linear-gradient(-45deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(-45deg, var(--color-primary), var(--color-secondary), var(--color-accent));
             background-size: 200% 200%;
             animation: gradient 15s ease infinite;
         }
@@ -56,7 +56,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            background-image: linear-gradient(45deg, var(--color-secondary), var(--color-accent));
         }
         .hover-scale {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -87,9 +87,38 @@
         .car-animation {
             animation: carAnimation 2s linear infinite;
         }
+        body {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+        }
+        #top-banner {
+            background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+        }
+        #hero .absolute {
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(128,128,128,0.7));
+        }
+        #services {
+            background-color: var(--color-primary);
+        }
+        .filter-btn {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+        }
+        .filter-btn:hover {
+            background-color: var(--color-accent);
+        }
+        #ad-banner {
+            background-color: var(--color-accent);
+        }
+        #contact {
+            background-color: var(--color-primary);
+        }
+        footer {
+            background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+        }
     </style>
 </head>
-<body class="font-montserrat bg-gradient-to-r from-accent to-white text-text">
+<body class="font-montserrat text-text">
     <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center gradient-bg">
         <div class="w-32 h-32 relative">
             <svg class="car-animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64" height="64">
@@ -101,7 +130,7 @@
         </div>
     </div>
 
-    <div id="top-banner" class="bg-gradient-to-r from-gray-900 to-gray-700 text-white py-2 px-4 overflow-hidden">
+    <div id="top-banner" class="text-white py-2 px-4 overflow-hidden">
         <div class="top-banner-slider flex transition-transform duration-500 ease-in-out">
             <div class="flex-shrink-0 w-full text-center">🎉 Special Offer: 20% off all detailing packages this week!</div>
             <div class="flex-shrink-0 w-full text-center">🚗 New Service: Ceramic coating now available!</div>
@@ -144,11 +173,11 @@
             <div class="relative z-10 text-center text-white">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-4 animate-fade-in-up">Luxury Mobile Detailing</h1>
                 <p class="text-xl md:text-2xl mb-8 animate-fade-in-up delay-300">Serving LA, OC, IE with Interior & Exterior detailing</p>
-                <a href="#contact" class="bg-white text-gray-900 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-200 transition-colors duration-300 animate-fade-in-up delay-600 hover:shadow-lg">Book Now</a>
+                <a href="#contact" class="bg-secondary text-primary px-8 py-3 rounded-full font-bold text-lg hover:bg-accent transition-colors duration-300 animate-fade-in-up delay-600 hover:shadow-lg">Book Now</a>
             </div>
         </section>
 
-        <section id="services" class="py-16 bg-accent fade-in">
+        <section id="services" class="py-16 fade-in">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-center mb-12 text-gradient">Our Services</h2>
                 <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
@@ -159,37 +188,37 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-center mb-12 text-white">Our Work</h2>
                 <div class="flex flex-wrap justify-center space-x-2 space-y-2 mb-8">
-                    <button class="filter-btn active bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">All</button>
-                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Interior</button>
-                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Exterior</button>
-                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Ceramic</button>
-                    <button class="filter-btn bg-accent text-gray-800 px-4 py-2 rounded-full transition-colors duration-300 hover:bg-gray-200 m-2">Paint</button>
+                    <button class="filter-btn active px-4 py-2 rounded-full transition-colors duration-300 hover:bg-accent m-2">All</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-colors duration-300 hover:bg-accent m-2">Interior</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-colors duration-300 hover:bg-accent m-2">Exterior</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-colors duration-300 hover:bg-accent m-2">Ceramic</button>
+                    <button class="filter-btn px-4 py-2 rounded-full transition-colors duration-300 hover:bg-accent m-2">Paint</button>
                 </div>
                 <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
         </section>
 
-        <section id="ad-banner" class="py-16 bg-accent fade-in">
+        <section id="ad-banner" class="py-16 fade-in">
             <div class="container mx-auto px-4">
-                <div id="adSlider" class="overflow-hidden rounded-lg shadow-xl"></div>
+            <div id="adSlider" class="overflow-hidden rounded-lg shadow-xl"></div>
             </div>
         </section>
 
-        <section id="contact" class="py-16 bg-gray-100 fade-in">
+        <section id="contact" class="py-16 fade-in">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-center mb-12 text-gradient">Contact Us</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-map-marker-alt text-text"></i>
+                            <i class="fas fa-map-marker-alt text-secondary"></i>
                             <span>Serving LA, OC, IE</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-phone text-text"></i>
+                            <i class="fas fa-phone text-secondary"></i>
                             <span>123-456-7890</span>
                         </div>
-                        <div class="flex  items-center space-x-2">
-                            <i class="fas fa-envelope text-text"></i>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-secondary"></i>
                             <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147d7a727b54787b6d7578797b767d7871707160757d787d7a733a777b79">[email&#160;protected]</a></span>
                         </div>
                         <div class="w-full h-64 rounded-lg overflow-hidden">
@@ -197,11 +226,11 @@
                         </div>
                     </div>
                     <form id="contactForm" class="space-y-4">
-                        <input type="text" placeholder="Name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required>
-                        <input type="email" placeholder="Email" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required>
-                        <input type="tel" placeholder="Phone" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required>
-                        <textarea placeholder="Message" class="w-full p-2 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300" required></textarea>
-                        <button type="submit" class="w-full bg-primary text-white py-2 rounded hover:bg-secondary transition-colors duration-300">Send Message</button>
+                        <input type="text" placeholder="Name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300" required>
+                        <input type="email" placeholder="Email" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300" required>
+                        <input type="tel" placeholder="Phone" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300" required>
+                        <textarea placeholder="Message" class="w-full p-2 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300" required></textarea>
+                        <button type="submit" class="w-full bg-secondary text-primary py-2 rounded hover:bg-accent transition-colors duration-300">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -218,21 +247,21 @@
                 <div>
                     <h3 class="text-xl font-bold mb-2">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#services" class="hover:text-text-light transition-colors duration-300">Services</a></li>
-                        <li><a href="#gallery" class="hover:text-text-light transition-colors duration-300">Gallery</a></li>
-                        <li><a href="#contact" class="hover:text-text-light transition-colors duration-300">Contact</a></li>
+                        <li><a href="#services" class="hover:text-secondary transition-colors duration-300">Services</a></li>
+                        <li><a href="#gallery" class="hover:text-secondary transition-colors duration-300">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-secondary transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-2">Connect With Us</h3>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-text-light transition-colors duration-300">
+                        <a href="https://www.instagram.com/loyal_mobile_detailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-secondary transition-colors duration-300">
                             <i class="fab fa-instagram fa-2x"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-text-light transition-colors duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-secondary transition-colors duration-300">
                             <i class="fab fa-facebook fa-2x"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-text-light transition-colors duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-secondary transition-colors duration-300">
                             <i class="fab fa-twitter fa-2x"></i>
                         </a>
                     </div>
