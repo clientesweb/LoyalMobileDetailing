@@ -10,7 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlider = document.getElementById('hero-slider');
     const adSlider = document.getElementById('adSlider');
     const topBannerSlider = document.querySelector('.top-banner-slider');
+    const themeToggle = document.getElementById('theme-toggle');
     let topBannerCurrentSlide = 0;
+
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Check for saved theme preference or prefer-color-scheme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+    }
 
     // Preloader
     window.addEventListener('load', () => {
@@ -42,32 +56,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Header scroll effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
-            header.classList.add('shadow-md', 'bg-opacity-90');
+            header.classList.add('bg-gray-900', 'shadow-md');
         } else {
-            header.classList.remove('shadow-md', 'bg-opacity-90');
+            header.classList.remove('bg-gray-900', 'shadow-md');
         }
     });
 
     // Services data
     const services = [
         {
-            title: "Interior Detailing",
-            description: "Deep clean and sanitize your car's interior for a fresh, like-new feel.",
+            title: "Detallado Interior",
+            description: "Limpieza profunda y desinfección del interior de tu auto para una sensación fresca y como nueva.",
             image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
         },
         {
-            title: "Exterior Detailing",
-            description: "Restore your car's shine with our thorough exterior detailing service.",
+            title: "Detallado Exterior",
+            description: "Restaura el brillo de tu auto con nuestro servicio de detallado exterior completo.",
             image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
         },
         {
-            title: "Ceramic Coating",
-            description: "Protect your car's paint with our long-lasting ceramic coating service.",
+            title: "Recubrimiento Cerámico",
+            description: "Protege la pintura de tu auto con nuestro servicio de recubrimiento cerámico de larga duración.",
             image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         },
         {
-            title: "Paint Correction",
-            description: "Remove scratches and swirl marks to restore your car's perfect finish.",
+            title: "Corrección de Pintura",
+            description: "Elimina rayones y marcas de remolino para restaurar el acabado perfecto de tu auto.",
             image: "https://images.unsplash.com/photo-1612570158821-4503900049b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
         }
     ];
@@ -75,13 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate services grid
     services.forEach(service => {
         const serviceCard = document.createElement('div');
-        serviceCard.className = 'bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover-scale';
+        serviceCard.className = 'bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover-scale';
         serviceCard.innerHTML = `
             <img src="${service.image}" alt="${service.title}" class="w-full h-48 object-cover">
             <div class="p-4">
-                <h3 class="text-xl font-semibold mb-2">${service.title}</h3>
-                <p class="text-gray-600 mb-4">${service.description}</p>
-                <a href="https://wa.me/1234567890?text=I'm%20interested%20in%20your%20${encodeURIComponent(service.title)}%20service" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer">Book Now</a>
+                <h3 class="text-xl font-semibold mb-2 dark:text-white">${service.title}</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">${service.description}</p>
+                <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20su%20servicio%20de%20${encodeURIComponent(service.title)}." class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer">Reservar Ahora</a>
             </div>
         `;
         servicesGrid.appendChild(serviceCard);
@@ -106,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             galleryItem.innerHTML = `
                 <img src="${item.image}" alt="Gallery item" class="w-full h-64 object-cover">
                 <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
-                    <span class="text-white text-lg font-semibold">View</span>
+                    <span class="text-white text-lg font-semibold">Ver</span>
                 </div>
             `;
             galleryGrid.appendChild(galleryItem);
@@ -122,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterButtons.forEach(btn => btn.classList.remove('active', 'bg-gray-800', 'text-white'));
             button.classList.add('active', 'bg-gray-800', 'text-white');
 
-            const filteredItems = filter === 'all' 
+            const filteredItems = filter === 'todos' 
                 ? galleryItems 
                 : galleryItems.filter(item => item.category === filter);
             
@@ -134,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         // Here you would typically send the form data to a server
-        alert('Thank you for your message. We will contact you soon.');
+        alert('Gracias por tu mensaje. Te contactaremos pronto.');
         contactForm.reset();
     });
 
@@ -159,9 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ad banner slider
     const ads = [
-        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Special Offer", description: "20% off full detailing" },
-        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "New Service", description: "Ceramic coating now available" },
-        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Season Package", description: "Interior + Exterior detailing for $199" }
+        { image: "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Oferta Especial", description: "20% de descuento en detallado completo" },
+        { image: "https://images.unsplash.com/photo-1600964373031-f0b65565f354?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80", title: "Nuevo Servicio", description: "Recubrimiento cerámico ahora disponible" },
+        { image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80", title: "Paquete de Temporada", description: "Detallado interior + exterior por $199" }
     ];
 
     let currentAdIndex = 0;
@@ -173,12 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     adSlider.innerHTML = ads.map(ad => `
         <div class="flex-shrink-0 w-full">
-            <div class="flex items-center bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl">
+            <div class="flex items-center bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl">
                 <img src="${ad.image}" alt="${ad.title}" class="w-1/2 h-64 object-cover">
                 <div class="w-1/2 p-6">
-                    <h3 class="text-2xl font-semibold mb-2">${ad.title}</h3>
-                    <p class="text-gray-600 mb-4">${ad.description}</p>
-                    <a href="#contact" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300">Book Now</a>
+                    <h3 class="text-2xl font-semibold mb-2 dark:text-white">${ad.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">${ad.description}</p>
+                    <a href="#contact" class="inline-block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300">Reservar Ahora</a>
                 </div>
             </div>
         </div>
@@ -209,4 +223,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setInterval(updateTopBannerSlider, 5000);
+
+    // Testimonials
+    const testimonials = [
+        { name: "Juan Pérez", text: "Increíble servicio. Mi auto nunca había lucido tan bien." },
+        { name: "María García", text: "Profesionales y detallistas. Altamente recomendados." },
+        { name: "Carlos Rodríguez", text: "El recubrimiento cerámico realmente hizo una diferencia. ¡Gracias!" }
+    ];
+
+    const testimonialSlider = document.getElementById('testimonialSlider');
+    testimonialSlider.innerHTML = testimonials.map(testimonial => `
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 dark:text-gray-300 mb-4">"${testimonial.text}"</p>
+            <p class="font-semibold dark:text-white">- ${testimonial.name}</p>
+        </div>
+    `).join('');
+
+    // Add more JavaScript for additional functionality as needed
 });
