@@ -71,7 +71,7 @@
     <div x-show="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
         <div class="text-center">
             <img src="/placeholder.svg" alt="Loyal Mobile Detailing Logo" class="w-32 h-32 mx-auto mb-4 animate-pulse">
-            <div class="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+            <div class="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto"></div>
         </div>
     </div>
 
@@ -94,12 +94,6 @@
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-instagram"></i></a>
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-twitter"></i></a>
         </div>
-    </div>
-
-    <!-- Promotional Banner -->
-    <div class="bg-blue-600 text-white py-3 px-4 text-center">
-        <p class="text-lg font-bold">🎊 Grand Opening Special: 30% off your first detailing service! 🎊</p>
-        <p class="text-sm mt-1">Use code: GRAND30 at checkout. Valid until [End Date].</p>
     </div>
 
     <!-- Header with Responsive Navigation -->
@@ -138,9 +132,9 @@
         <!-- Hero Section with Automatic Slider -->
         <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <div x-show="currentSlide === 0" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
-                <div x-show="currentSlide === 1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
-                <div x-show="currentSlide === 2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 0" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 1" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 2" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
             </div>
             <div class="text-center z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome to our platform</h1>
@@ -373,7 +367,7 @@
                         </button>
                         <div x-show="activeAccordion === 2" class="p-4 border-t border-gray-700">
                             <p class="text-sm md:text-base">The duration of a detailing service can vary depending on the package and condition of the vehicle, but typically ranges from 2 to 6 hours.</p>
-                        </div>
+                                                </div>
                     </div>
                     <div class="border border-gray-700 rounded-lg">
                         <button @click="activeAccordion = activeAccordion === 3 ? null : 3" class="flex justify-between items-center w-full p-4 focus:outline-none">
@@ -383,6 +377,21 @@
                         <div x-show="activeAccordion === 3" class="p-4 border-t border-gray-700">
                             <p class="text-sm md:text-base">We provide mobile detailing services in Los Angeles, Orange County, and the Inland Empire areas.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotional Banner -->
+        <section class="py-16 md:py-20 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="bg-blue-600 text-white py-8 px-4 text-center rounded-lg relative overflow-hidden">
+                    <img src="/placeholder.svg?height=400&width=1200" alt="Promotional Banner Background" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay">
+                    <div class="relative z-10">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">🎊 Grand Opening Special 🎊</h2>
+                        <p class="text-lg mb-4">30% off your first detailing service!</p>
+                        <p class="text-sm mb-6">Use code: GRAND30 at checkout. Valid until [End Date].</p>
+                        <a href="#contact" class="bg-white text-blue-600 px-6 py-2 rounded-full hover:bg-gray-200 transition">Book Now</a>
                     </div>
                 </div>
             </div>
