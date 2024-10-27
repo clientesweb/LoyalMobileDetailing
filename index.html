@@ -66,12 +66,12 @@
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans" x-data="{ mobileMenu: false, currentSlide: 0, modalOpen: false, selectedImage: '', loading: false, currentBanner: 0 }">
+<body class="bg-black text-white font-sans" x-data="{ mobileMenu: false, currentSlide: 0, modalOpen: false, selectedImage: '', loading: true, currentBanner: 0 }">
     <!-- Preloader -->
     <div x-show="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
         <div class="text-center">
             <img src="/placeholder.svg" alt="Loyal Mobile Detailing Logo" class="w-32 h-32 mx-auto mb-4 animate-pulse">
-            <p class="text-xl font-semibold">Loading...</p>
+            <div class="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
         </div>
     </div>
 
@@ -89,7 +89,7 @@
                 💼 Corporate accounts welcome. Contact us for special rates!
             </p>
         </div>
-        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 space-x-2 md:static md:transform-none md:mt-2">
+        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 space-x-2">
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-facebook"></i></a>
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-instagram"></i></a>
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-twitter"></i></a>
@@ -136,18 +136,17 @@
 
     <main>
         <!-- Hero Section with Automatic Slider -->
-        <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden" x-data="{ currentSlide: 0 }">
+        <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <div x-show="currentSlide === 0" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
                 <div x-show="currentSlide === 1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
                 <div x-show="currentSlide === 2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
             </div>
             <div class="text-center z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">Luxury Mobile Detailing in LA, OC, and IE</h1>
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome to our platform</h1>
                 <p class="text-lg md:text-xl mb-8">Experience the pinnacle of automotive care</p>
                 <div class="space-x-4">
                     <a href="#services" class="bg-white text-black px-6 py-2 md:px-8 md:py-3 rounded-full hover:bg-gray-200 transition text-sm md:text-base">Our Services</a>
-                    <a href="#contact" class="bg-transparent border-2 border-white text-white px-6 py-2 md:px-8 md:py-3 rounded-full hover:bg-white hover:text-black transition text-sm md:text-base">Book Now</a>
                 </div>
             </div>
         </section>
@@ -193,7 +192,7 @@
                         <p class="mb-4 text-sm md:text-base">Revitalize your vehicle's interior with our meticulous cleaning process.</p>
                         <a href="#" class="text-white hover:underline text-sm md:text-base">Learn More</a>
                     </div>
-                    <div class="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in">
+                    <div class="bg-white bg-opacity-10 p-6  rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in">
                         <i class="fas fa-spray-can text-3xl md:text-4xl text-white mb-4"></i>
                         <h3 class="text-lg md:text-xl font-semibold mb-4">Ceramic Coating</h3>
                         <p class="mb-4 text-sm md:text-base">Protect your vehicle's paint with our long-lasting ceramic coating service.</p>
@@ -437,7 +436,7 @@
                 <div class="text-center md:text-left">
                     <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
                     <p class="text-sm">Phone: (123) 456-7890</p>
-                    <p class="text-sm">Email: info@loyalmobiledetailing.com</p>
+                    <p class="text-sm">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd6d1d9d0ffd3d0c6ded3d2d0ddd6d3dadbdacbded6d3d6d1d891dcd0d2">[email&#160;protected]</a></p>
                     <p class="text-sm">Address: Los Angeles, CA</p>
                 </div>
                 <div class="text-center md:text-left">
@@ -461,7 +460,7 @@
         <i class="fab fa-whatsapp fa-2x"></i>
     </a>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Hero Slider
         setInterval(() => {
             let currentSlide = document.querySelector('[x-data]').__x.$data.currentSlide;
