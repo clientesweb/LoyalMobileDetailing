@@ -66,7 +66,7 @@
         }
     </style>
 </head>
-<body class="bg-black text-white font-sans" x-data="{ mobileMenu: false, currentSlide: 0, modalOpen: false, selectedImage: '', loading: true }">
+<body class="bg-black text-white font-sans" x-data="{ mobileMenu: false, currentSlide: 0, modalOpen: false, selectedImage: '', loading: false, currentBanner: 0 }">
     <!-- Preloader -->
     <div x-show="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
         <div class="text-center">
@@ -76,16 +76,30 @@
     </div>
 
     <!-- Top Banner -->
-    <div class="bg-gradient-to-r from-gray-gradient-start to-gray-gradient-end text-white py-2 px-4 text-center relative">
-        <p class="text-sm inline-block pr-20 md:pr-0">
-            🎉 Special Offer: 20% off on all services this week! Book now 
-            <a href="#contact" class="underline">here</a>
-        </p>
+    <div class="bg-gradient-to-r from-gray-gradient-start to-gray-gradient-end text-white py-2 px-4 text-center relative overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentBanner * 100}%)` }">
+            <p class="text-sm w-full flex-shrink-0">
+                🎉 Special Offer: 20% off on all services this week! Book now 
+                <a href="#contact" class="underline">here</a>
+            </p>
+            <p class="text-sm w-full flex-shrink-0">
+                🚗 New ceramic coating service available! Protect your car's paint today!
+            </p>
+            <p class="text-sm w-full flex-shrink-0">
+                💼 Corporate accounts welcome. Contact us for special rates!
+            </p>
+        </div>
         <div class="absolute right-4 top-1/2 transform -translate-y-1/2 space-x-2 md:static md:transform-none md:mt-2">
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-facebook"></i></a>
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-instagram"></i></a>
             <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-twitter"></i></a>
         </div>
+    </div>
+
+    <!-- Promotional Banner -->
+    <div class="bg-blue-600 text-white py-3 px-4 text-center">
+        <p class="text-lg font-bold">🎊 Grand Opening Special: 30% off your first detailing service! 🎊</p>
+        <p class="text-sm mt-1">Use code: GRAND30 at checkout. Valid until [End Date].</p>
     </div>
 
     <!-- Header with Responsive Navigation -->
@@ -101,6 +115,7 @@
                     </svg>
                 </button>
                 <div class="hidden md:flex space-x-4">
+                    <a href="#about" class="hover:text-gray-300 transition">About Us</a>
                     <a href="#services" class="hover:text-gray-300 transition">Services</a>
                     <a href="#gallery" class="hover:text-gray-300 transition">Gallery</a>
                     <a href="#testimonials" class="hover:text-gray-300 transition">Testimonials</a>
@@ -109,6 +124,7 @@
                 </div>
             </div>
             <div x-show="open" class="md:hidden mt-3 space-y-2">
+                <a href="#about" class="block hover:text-gray-300 transition">About Us</a>
                 <a href="#services" class="block hover:text-gray-300 transition">Services</a>
                 <a href="#gallery" class="block hover:text-gray-300 transition">Gallery</a>
                 <a href="#testimonials" class="block hover:text-gray-300 transition">Testimonials</a>
@@ -122,9 +138,9 @@
         <!-- Hero Section with Automatic Slider -->
         <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden" x-data="{ currentSlide: 0 }">
             <div class="absolute inset-0 z-0">
-                <div x-show="currentSlide === 0" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
-                <div x-show="currentSlide === 1" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
-                <div x-show="currentSlide === 2" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 0" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
             </div>
             <div class="text-center z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">Luxury Mobile Detailing in LA, OC, and IE</h1>
@@ -136,15 +152,39 @@
             </div>
         </section>
 
+        <!-- About Us Section -->
+        <section id="about" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">About Us</h2>
+                <div class="flex overflow-x-auto space-x-6 pb-4 fade-in">
+                    <div class="flex-shrink-0 w-64 md:w-80">
+                        <img src="/placeholder.svg" alt="Our Beginning" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-lg font-semibold mb-2">Our Beginning</h3>
+                        <p class="text-sm">Founded in 2010 with a passion for cars and a dream to provide top-notch detailing services.</p>
+                    </div>
+                    <div class="flex-shrink-0 w-64 md:w-80">
+                        <img src="/placeholder.svg" alt="Growing Years" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-lg font-semibold mb-2">Growing Years</h3>
+                        <p class="text-sm">Expanded our services and team to meet the increasing demand for quality mobile detailing.</p>
+                    </div>
+                    <div class="flex-shrink-0 w-64 md:w-80">
+                        <img src="/placeholder.svg" alt="Today" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-lg font-semibold mb-2">Today</h3>
+                        <p class="text-sm">Now serving all of LA, OC, and IE with a reputation for excellence and customer satisfaction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Services Section -->
-        <section id="services" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end">
+        <section id="services" class="py-16 md:py-20 bg-black">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Our Services</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     <div class="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in">
                         <i class="fas fa-car-alt text-3xl md:text-4xl text-white mb-4"></i>
                         <h3 class="text-lg md:text-xl font-semibold mb-4">Exterior Detailing</h3>
-                        <p class="mb-4 text-sm md:text-base">Restore your car's exterior to a showroom shine with our expert techniques.</p>
+                        <p class="mb-4 text-sm md:text-base">Restore your car's exterior to a showroom shine with our expert  techniques.</p>
                         <a href="#" class="text-white hover:underline text-sm md:text-base">Learn More</a>
                     </div>
                     <div class="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in">
@@ -170,7 +210,7 @@
         </section>
 
         <!-- Gallery Section with Filter and Modal -->
-        <section id="gallery" class="py-16 md:py-20 bg-black" x-data="{ activeFilter: 'all' }">
+        <section id="gallery" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end" x-data="{ activeFilter: 'all' }">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Our Work</h2>
                 <div class="flex flex-wrap justify-center space-x-2 md:space-x-4 mb-6 md:mb-8 fade-in">
@@ -241,7 +281,7 @@
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end" x-data="{ activeTestimonial: 0 }">
+        <section id="testimonials" class="py-16 md:py-20 bg-black" x-data="{ activeTestimonial: 0 }">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">What Our Clients Say</h2>
                 <div class="relative fade-in">
@@ -314,7 +354,7 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-16 md:py-20 bg-black">
+        <section id="faq" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Frequently Asked Questions</h2>
                 <div class="space-y-4 fade-in" x-data="{ activeAccordion: null }">
@@ -350,22 +390,22 @@
         </section>
 
         <!-- Contact Section with Map -->
-        <section id="contact" class="py-16 md:py-20 bg-gradient-to-b from-gray-gradient-start to-gray-gradient-end">
+        <section id="contact" class="py-16 md:py-20 bg-black">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Contact Us</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-in">
-                    <form class="space-y-4">
+                    <form class="space-y-4" action="https://formspree.io/f/your-formspree-endpoint" method="POST">
                         <div>
                             <label for="name" class="block mb-2 text-sm md:text-base">Name</label>
-                            <input type="text" id="name" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required>
+                            <input type="text" id="name" name="name" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm md:text-base">Email</label>
-                            <input type="email" id="email" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required>
+                            <input type="email" id="email" name="email" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required>
                         </div>
                         <div>
                             <label for="message" class="block mb-2 text-sm md:text-base">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required></textarea>
+                            <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 bg-white bg-opacity-10 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base" required></textarea>
                         </div>
                         <button type="submit" class="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition text-sm md:text-base">Send Message</button>
                     </form>
@@ -377,7 +417,7 @@
         </section>
     </main>
 
-    <footer class="bg-black py-12">
+    <footer class="bg-gray-900 py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="text-center md:text-left">
@@ -387,6 +427,7 @@
                 <div class="text-center md:text-left">
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
+                        <li><a href="#about" class="hover:text-gray-300 transition text-sm">About Us</a></li>
                         <li><a href="#services" class="hover:text-gray-300 transition text-sm">Services</a></li>
                         <li><a href="#gallery" class="hover:text-gray-300 transition text-sm">Gallery</a></li>
                         <li><a href="#testimonials" class="hover:text-gray-300 transition text-sm">Testimonials</a></li>
@@ -415,6 +456,11 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="fixed bottom-4 right-4 bg-green-500 text-white rounded-full p-3 hover:bg-green-600 transition-colors z-50">
+        <i class="fab fa-whatsapp fa-2x"></i>
+    </a>
+
     <script>
         // Hero Slider
         setInterval(() => {
@@ -426,6 +472,12 @@
         setInterval(() => {
             let activeTestimonial = document.querySelector('[x-data]').__x.$data.activeTestimonial;
             document.querySelector('[x-data]').__x.$data.activeTestimonial = (activeTestimonial + 1) % 3;
+        }, 5000);
+
+        // Top Banner Slider
+        setInterval(() => {
+            let currentBanner = document.querySelector('[x-data]').__x.$data.currentBanner;
+            document.querySelector('[x-data]').__x.$data.currentBanner = (currentBanner + 1) % 3;
         }, 5000);
 
         // Preloader
